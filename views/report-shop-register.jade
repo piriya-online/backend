@@ -1,0 +1,60 @@
+extends layout
+
+block content
+
+	#dv-loading.callout.callout-info.text-center
+		img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+		span.loading.text-muted &nbsp;#{__('loadingData')}
+
+	#dv-no_data.callout.callout-danger.text-center.hidden
+		span.loading.text-muted &nbsp;#{__('noData')}
+
+	.table-responsive.wait.hidden
+		table#tb-result.table.table-striped.table-condensed.table-hover.wait.hidden
+			thead
+				tr.font-sm
+					th(width="280") #{__('firstname')} - #{__('lastname')}
+					th(width="120") #{__('submitDate')}
+					th(width="120") เวลาในการติดต่อ
+					th(width="120") เบอร์โทรฯ
+					th ที่อยู่
+			tbody
+
+	#dv-info.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-lg
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only Close
+					h4.modal-title
+				.modal-body
+					dl
+						dt  เบอร์โทรฯ
+						dd.mobile
+					dl
+						dt  เวลาที่สะดวกในการติดต่อ
+						dd.time
+					dl
+						dt  ที่อยู่
+						dd.address
+
+					.row
+						.col-sm-6.img0
+							a(href="#", target="_blank")
+								img.img-responsive.img-rounded.margin-bottom-10(src="https://img.remaxthailand.co.th/product/default.jpg")
+						.col-sm-6.img1
+							a(href="#", target="_blank")
+								img.img-responsive.img-rounded.margin-bottom-10(src="https://img.remaxthailand.co.th/product/default.jpg")
+						.col-sm-6.img2
+							a(href="#", target="_blank")
+								img.img-responsive.img-rounded.margin-bottom-10(src="https://img.remaxthailand.co.th/product/default.jpg")
+						.col-sm-6.img3
+							a(href="#", target="_blank")
+								img.img-responsive.img-rounded.margin-bottom-10(src="https://img.remaxthailand.co.th/product/default.jpg")
+
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') #{__('cancel')}
+
+
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')

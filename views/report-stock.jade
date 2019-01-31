@@ -1,0 +1,83 @@
+extends layout
+
+block content
+	.row
+		.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.box.box-solid
+				.box-body
+					.row
+						form#form-select.col-sm-12 
+							.form-group.col-sm-3.text-danger
+								label(for='input') #{__('Brand')}	
+								select#cbb-brand.form-control.col-sm-3
+
+						wait.hidden.col-sm-12 
+							ul
+								li
+									a#btn-aging(href="javascript:void(0)") Stock Aging Report
+								
+
+							ul
+								li
+									a#btn-run_rate(href="javascript:void(0)") Stock Run Rate Report
+
+		.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.box.box-solid
+				.box-body.padding-25
+					H3 สต็อคคงเหลือประจำวัน
+					.row
+						.col-sm-3										
+							.input-group
+								input.form-control#date.datepicker.form-control(data-date-format="dd/mm/yyyy")
+								span.input-group-btn
+									button#btn-search.btn.btn-default(type='button')
+										i.fa.fa-search
+						.col-sm-12.margin-top-10
+							#dv-loading_data.text-center
+								img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+								span.loading.text-muted &nbsp;#{__('loadingData')}					
+							#dv-no_data.text-center.hidden
+								span.loading.text-muted &nbsp;#{__('noData')}
+							.wait.hidden
+								.table-responsive
+									table#tb-result.table.table-bordered.table-condensed.table-hover.table2excel-unpaid
+										thead
+											tr.font-sm 												
+												th.text-center(rowspan="2" width="75") #{__('category')}
+												th.text-center(colspan="2")
+													| REMAX
+												th.text-center(colspan="2")
+													| WK
+												th.text-center(colspan="2")
+													| PISEN
+												th.text-center(colspan="2")
+													| PNG
+											tr.font-sm
+												th.text-right(width="75")
+													| จำนวน
+												th.text-right(width="75")
+													| มูลค่า
+												th.text-right(width="75")
+													| จำนวน
+												th.text-right(width="75")
+													| มูลค่า
+												th.text-right(width="75")
+													| จำนวน
+												th.text-right(width="75")
+													| มูลค่า
+												th.text-right(width="75")
+													| จำนวน
+												th.text-right(width="75")
+													| มูลค่า
+										tbody
+										thead
+											tr
+												th.text-center #{__('Summary')}
+												th#sumremaxQty.text-right
+												th#sumremaxPrice.text-right
+												th#sumwkQty.text-right
+												th#sumwkPrice.text-right
+												th#sumpisenQty.text-right
+												th#sumpisenPrice.text-right
+												th#sumpngQty.text-right
+												th#sumpngPrice.text-right

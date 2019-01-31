@@ -1,0 +1,41 @@
+{
+  "name": "remax",
+  "version": "1.0.0",
+  "description": "Remax (Thailand) Website",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "crypto": "0.0.3",
+    "errorhandler": "^1.5.0",
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "i18n": "^0.8.3",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.8",
+    "morgan": "^1.8.1",
+    "path": "^0.12.7",
+    "querystring": "^0.2.0",
+    "request": "^2.81.0",
+    "serve-favicon": "^2.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RemaxThailand/Web.git"
+  },
+  "keywords": [
+    "Remax",
+    "Web"
+  ],
+  "author": "Remax (Thailand)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RemaxThailand/Web/issues"
+  },
+  "homepage": "https://github.com/RemaxThailand/Web#readme"
+}

@@ -1,0 +1,87 @@
+extends layout
+
+block content
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12.padding-left-0.padding-right-0
+
+		input#msg-cancel(type="hidden", value="#{__('cancel')}")
+
+		ul.nav.nav-tabs(role='tablist')
+			li.active(role='presentation')
+				a(href='#by_product', aria-controls='sales', role='tab', data-toggle='tab') #{__('By Product')}
+			li(role='presentation')
+				a(href='#by_customer', aria-controls='run_rate', role='tab', data-toggle='tab') #{__('By Customer')}
+
+		.tab-content
+			#by_product.tab-pane.active(role='tabpanel')
+				.padding-10.padding-left-5.background-white
+					form.form-inline
+						div.checkbox
+							label.margin-left-10
+								input.plan(type="checkbox",checked='checked')
+								| &nbsp;สินค้าที่กำลังจะเข้าคลังสินค้า
+						div.checkbox
+							label.margin-left-10
+								input.in_stock(type="checkbox",checked='checked')
+								| &nbsp;มีสินค้าในคลัง
+
+				.table-responsive.background-white
+					table#tb-result.table.table-condensed.hidden
+						thead
+							tr.font-sm
+								th.text-center(width="50") 
+								th.text-center #{__('productName')}
+								th.text-right(width="40") 90
+								th.text-right(width="40") 60
+								th.text-right(width="40") 30
+								th.text-right(width="40") 15
+								th.text-right(width="50") 0
+								th.text-right(width="50") Stock
+								th.text-right(width="50") Plan
+								th.text-right(width="50") จอง
+						tbody
+						tfoot#dv-no_data.hidden
+							td(colspan=12)
+								div.callout.callout-danger.text-center.loading.text-muted &nbsp;#{__('noData')}
+
+			#by_customer.tab-pane.background-white(role='tabpanel')
+				.padding-10.padding-left-5.hidden
+					form.form-inline
+						div.checkbox
+							label.margin-left-10
+								input.plan(type="checkbox",checked='checked')
+								| &nbsp;สินค้าที่กำลังจะเข้าคลังสินค้า
+						div.checkbox
+							label.margin-left-10
+								input.in_stock(type="checkbox",checked='checked')
+								| &nbsp;มีสินค้าในคลัง
+
+				.table-responsive
+					table#tb-customer.table.table-condensed.hidden
+						thead
+							tr.font-sm
+								th.text-center(width="60") #{__('item(s)')}
+								th.text-center(width="80") #{__('piece(s)')}
+								th #{__('Customer Name')}
+								th #{__('contact name')}
+								th(width="250") #{__('shop name')}
+								th(width="100") #{__('mobilePhoneNumber')}
+								th(width="130") #{__('province')}
+						tbody
+						tfoot#dv-no_customer.hidden
+							td(colspan=12)
+								div.callout.callout-danger.text-center.loading.text-muted &nbsp;#{__('noData')}
+
+
+		#dv-loading.callout.callout-info.text-center
+			img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+			span.loading.text-muted &nbsp;#{__('loadingData')}
+
+
+
+	#modal-alert.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content.padding-10				
+				.text-center
+					p คุณแน่ใจหรือไม่ ที่จะยกเลิกการจองสินค้านี้
+					button#btnConfirm.btn.btn-default.margin-right-10(type='button') ยกเลิกการจอง
+					button.btn.btn-default(type='button', data-dismiss='modal') ปิด

@@ -1,0 +1,75 @@
+extends layout
+
+block content
+
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				.row.padding-10
+					#dv-loading.callout.callout-info.text-center.hidden
+						img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+						span.loading.text-muted &nbsp;#{__('loadingData')}						
+					form#form-select.col-sm-12
+						.form-group.col-sm-3.text-danger
+							label(for='input') #{__('Shop Name')}	
+							select.select-shop#cbb-shop.form-control													
+					form#shop_detail.form-horizontal(role='form')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') ชื่อช็อป
+							.col-sm-6
+								input#txt-shop_name.form-control.txt-input.txt-require(disabled='', type='text', placeholder='ชื่อช็อป', value='')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') รายละเอียด
+							.col-sm-6
+								textarea#txt-detail.form-control.txt-input.txt-require(row='5', type='text', placeholder='รายละเอียด', value='')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') ที่อยู่
+							.col-sm-6
+								input#txt-address.form-control.txt-input.txt-require(type='text', placeholder='ที่อยู่', value='')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') ที่อยู่ (ต่อ)
+							.col-sm-6
+								input#txt-address2.form-control.txt-input(type='text', placeholder='ที่อยู่ (ต่อ)', value='')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') จังหวัด
+							.col-sm-6
+								select#province.form-control(data-selected='')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') เขต/อำเภอ
+							.col-sm-6
+								select#district.form-control(data-selected='', data-zipcode='')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') แขวง/ตำบล
+							.col-sm-6
+								input#txt-sub_district.form-control.txt-input.txt-require(type='text', placeholder='แขวง/ตำบล', value='')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') รหัสไปรษณีย์
+							.col-sm-6
+								input#txt-zipcode.form-control.txt-input.txt-require(type='text', placeholder='รหัสไปรษณีย์')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') เบอร์โทรศัพท์
+							.col-sm-6
+								input#txt-tel.form-control.txt-input.txt-require(type='text', placeholder='เบอร์โทรศัพท์')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') รูปภาพ
+							.col-sm-6
+								input#txt-image.form-control.txt-input(type='text', placeholder='รูปภาพ (ตัวอย่าง: 1.jpg,2.jpg)')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') Line
+							.col-sm-6
+								input#txt-line.form-control.txt-input(type='text', placeholder='https://line.me/R/ti/p/%40hqz1408b')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') Facebook
+							.col-sm-6
+								input#txt-facebook.form-control.txt-input(type='text', placeholder='https://www.facebook.com/facebook')
+						.form-group
+							label.col-sm-3.control-label(for='txt-name') iframe GoogleMaps
+							.col-sm-6
+								textarea#txt-iframeGoogleMaps.form-control.txt-input(row='5', type='text', placeholder='iframe GoogleMaps')
+						.form-group.text-center
+							span#btn-submit.btn.btn-warning ยืนยันข้อมูล
+						#dv-done.alert.alert-success.margin-bottom-30.text-center.hidden(role='alert')
+								i.fa.fa-check-circle-o.fa-lg
+								| ปรับปรุงข้อมูล
+								b#orderNolbl 
+								| เรียบร้อยแล้ว

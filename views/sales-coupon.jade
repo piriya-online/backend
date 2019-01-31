@@ -1,0 +1,43 @@
+extends layout
+
+block content
+
+	#dv-loading.callout.callout-info.text-center.wait.hidden
+		img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+		span.loading.text-muted &nbsp;#{__('loadingData')}
+
+	div.col-md-12
+
+		.box.box-warning
+			.box-header
+				h3.box-title #{__('role-dealer')}
+				.box-tools.pull-right
+					if info.memberType == 'sale'
+						.btn.btn-default.btn-reload(title="#{__('loadData')}")
+							i.fa.fa-refresh
+					if permission.insert != ''
+						.btn.btn-default.btn-add.margin-left-3.hidden(title="#{__('addData')}", data-toggle="modal", data-target="#dv-add")
+							i.fa.fa-plus-circle
+					if permission.delete != ''
+						.btn.btn-default.btn-delete.margin-left-3.hidden(title="#{__('deleteData')}")
+							i.fa.fa-trash
+					if info.memberType != 'sale'
+						.btn.btn-default.btn-expand.margin-left-3(data-col="tree", data-block="#{info.memberType == 'manager' ? '4' : (info.memberType == 'headSale' ? '8' : '12')}", title="#{__('expandScreen')}")
+							i.fa.fa-expand
+						.btn.btn-default.btn-compress.margin-left-3.hidden(data-col="tree", data-block="#{info.memberType == 'manager' ? '4' : (info.memberType == 'headSale' ? '8' : '12')}", title="#{__('collapseScreen')}")
+							i.fa.fa-compress
+			.box-body.table-responsive
+
+				table#tb-result.table.table-condensed.table-hover
+					thead
+						tr.bg-white.font-sm
+							th(width="70", nowrap="nowrap") รหัส
+							th(nowrap="nowrap") ชื่อโปรโมชั่น
+							th.text-right(width="70", nowrap="nowrap") ส่วนลด
+							th(width="70", nowrap="nowrap") หน่วย
+							th(width="120", nowrap="nowrap") วันที่เริ่ม
+							th(width="120", nowrap="nowrap") วันหมดอายุ
+							th.text-right(width="70", nowrap="nowrap") จำนวน
+							th.text-right(width="70", nowrap="nowrap") ใช้ไปแล้ว
+							th.text-right(width="30", nowrap="nowrap") สถานะ
+					tbody

@@ -1,0 +1,210 @@
+extends layout
+
+block content
+
+	input#msg-invalidSecretCode(type='hidden', value="#{__('invalidSecretCode')}")
+
+	.row
+		if info.memberType == 'manager'
+			.col-md-6.col4hide.col-one
+				.box.box-primary
+					.box-header
+						h3.box-title #{__('role-headSale')} 
+						.box-tools.pull-right
+							.btn.btn-default.btn-reload.margin-left-3(title="#{__('loadData')}")
+								i.fa.fa-refresh
+							if permission.insert != ''
+								.btn.btn-default.btn-add.margin-left-3.hidden(title="#{__('addData')}", data-toggle="modal", data-target="#dv-add")
+									i.fa.fa-plus-circle
+							if permission.delete != ''
+								.btn.btn-default.btn-delete.margin-left-3.hidden(title="#{__('deleteData')}")
+									i.fa.fa-trash
+							if info.memberType != 'sale'
+								.btn.btn-default.btn-expand.margin-left-3(data-col="one", data-block="6", title="#{__('expandScreen')}")
+									i.fa.fa-expand
+								.btn.btn-default.btn-compress.margin-left-3.hidden(data-col="one", data-block="6", title="#{__('collapseScreen')}")
+									i.fa.fa-compress
+					.box-body.hidden.table-responsive
+						table#tb-headSale.table.table-condensed.table-hover.font-sm(data-type="headSale")
+							thead
+								th(width="20") #{__('no')}
+								th.td-hide.hidden(width="100", nowrap="nowrap") #{__('username')}
+								th(nowrap="nowrap") #{__('firstname')}
+								th(nowrap="nowrap") #{__('lastname')}
+								th(nowrap="nowrap") Dealer
+								th.td-hide.hidden(width="80", nowrap="nowrap") #{__('nickname')}
+								th.td-hide.hidden(width="200", nowrap="nowrap") #{__('email')}
+								th.td-hide.hidden(width="90", nowrap="nowrap") #{__('mobilePhoneNumber')}
+								th.td-hide.hidden(width="120", nowrap="nowrap") #{__('mapDate')}
+								th.td-hide.hidden(width="120", nowrap="nowrap") #{__('loginDate')}
+								th.td-hide.text-center.hidden(width="80", nowrap="nowrap") #{__('loginCount')}
+							tbody
+						.text-center.no_data.hidden
+							p #{__('noData')}
+					.box-footer
+						img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+						span.loading.text-muted &nbsp;#{__('loadingData')}
+						i.error.text-red.fa.fa-warning.hidden
+						span.error.text-red.hidden.manualMessage
+
+		if info.memberType == 'x_manager' || info.memberType == 'x_headSale'
+			.col-md-4.col4hide.col-two
+
+				.box.box-info
+					.box-header
+						h3.box-title #{__('role-sale')}
+
+						.box-tools.pull-right
+							if info.memberType == 'manager'
+								.btn.btn-default.margin-left-3.dropdown
+									.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true")
+										| #{__('role-headSale')}  
+										span.caret
+									ul#ul-headSale.dropdown-menu(role="menu", aria-labelledby="dropdownMenu1")
+										li(role="presentation")
+											a(role="menuitem", tabindex="-1", href="javascript:void(0)", data-team="all")  #{__('all')}  
+							if info.memberType == 'headSale'
+								.btn.btn-default.btn-reload.margin-left-3(title="#{__('loadData')}")
+									i.fa.fa-refresh
+							if permission.insert != ''
+								.btn.btn-default.btn-add.margin-left-3.hidden(title="#{__('addData')}", data-toggle="modal", data-target="#dv-add")
+									i.fa.fa-plus-circle
+							if permission.delete != ''
+								.btn.btn-default.btn-delete.margin-left-3.hidden(title="#{__('deleteData')}")
+									i.fa.fa-trash
+							if info.memberType != 'sale'
+								.btn.btn-default.btn-expand.margin-left-3(data-col="two", data-block="6", title="#{__('expandScreen')}")
+									i.fa.fa-expand
+								.btn.btn-default.btn-compress.margin-left-3.hidden(data-col="two", data-block="6", title="#{__('collapseScreen')}")
+									i.fa.fa-compress
+					.box-body.hidden.table-responsive
+						table#tb-sale.table.table-condensed.table-hover.font-sm(data-type="sale")
+							thead
+								th(width="20") #{__('no')}
+								th.td-hide.hidden(width="100", nowrap="nowrap") #{__('username')}
+								th(nowrap="nowrap") #{__('firstname')}
+								th(nowrap="nowrap") #{__('lastname')}
+								th.td-hide.hidden(width="80", nowrap="nowrap") #{__('nickname')}
+								th.td-hide.hidden(width="200", nowrap="nowrap") #{__('email')}
+								th.td-hide.hidden(width="90", nowrap="nowrap") #{__('mobilePhoneNumber')}
+								th.td-hide.hidden(width="120", nowrap="nowrap") #{__('mapDate')}
+								th.td-hide.hidden(width="120", nowrap="nowrap") #{__('loginDate')}
+								th.td-hide.text-center.hidden(width="80", nowrap="nowrap") #{__('loginCount')}
+							tbody
+						.text-center.no_data.hidden
+							p #{__('noData')}
+					.box-footer
+						img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+						span.loading.text-muted &nbsp;#{__('loadingData')}
+						i.error.text-red.fa.fa-warning.hidden
+						span.error.text-red.hidden.manualMessage
+
+		if info.memberType == 'manager' || info.memberType == 'headSale' || info.memberType == 'sale'
+			div(class="col4hide col-tree #{info.memberType == 'manager' ? 'col-md-6' : (info.memberType == 'headSale' ? 'col-md-12' : 'col-md-12')}")
+
+				.box.box-warning
+					.box-header
+						h3.box-title #{__('role-dealer')}
+						.box-tools.pull-right
+							.btn.btn-default.margin-left-3.dropdown
+								.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true")
+									| #{__('role-sale')}  
+									span.caret
+								ul#ul-sale.dropdown-menu(role="menu", aria-labelledby="dropdownMenu1")
+									li(role="presentation")
+										a(role="menuitem", tabindex="-1", href="javascript:void(0)", data-team="all")  #{__('all')}  
+							if info.memberType == 'sale'
+								.btn.btn-default.btn-reload(title="#{__('loadData')}")
+									i.fa.fa-refresh
+							if permission.insert != ''
+								.btn.btn-default.btn-add.margin-left-3.hidden(title="#{__('addData')}", data-toggle="modal", data-target="#dv-add")
+									i.fa.fa-plus-circle
+							if permission.delete != ''
+								.btn.btn-default.btn-delete.margin-left-3.hidden(title="#{__('deleteData')}")
+									i.fa.fa-trash
+							if info.memberType != 'sale'
+								.btn.btn-default.btn-expand.margin-left-3(data-col="tree", data-block="#{info.memberType == 'manager' ? '6' : (info.memberType == 'headSale' ? '12' : '12')}", title="#{__('expandScreen')}")
+									i.fa.fa-expand
+								.btn.btn-default.btn-compress.margin-left-3.hidden(data-col="tree", data-block="#{info.memberType == 'manager' ? '6' : (info.memberType == 'headSale' ? '12' : '12')}", title="#{__('collapseScreen')}")
+									i.fa.fa-compress
+					.box-body.hidden.table-responsive
+						table#tb-dealer.table.table-condensed.table-hover.font-sm(data-type="dealer")
+							thead
+								th(width="20") #{__('no')}
+								th.td-hide.hidden(width="80", nowrap="nowrap") #{__('username')}
+								th(nowrap="nowrap") #{__('firstname')}
+								th(nowrap="nowrap") #{__('lastname')}
+								th.td-hide.hidden(width="80", nowrap="nowrap") #{__('nickname')}
+								th.td-hide.hidden(width="200", nowrap="nowrap") #{__('email')}
+								th.td-hide.hidden(width="90", nowrap="nowrap") #{__('mobilePhoneNumber')}
+								th.td-hide.hidden(width="120", nowrap="nowrap") #{__('mapDate')}
+								th.td-hide.hidden(width="120", nowrap="nowrap") #{__('loginDate')}
+								th.td-hide.text-center.hidden(width="80", nowrap="nowrap") #{__('loginCount')}
+								th.text-center(width="50", nowrap="nowrap") #{__('price')}
+								th.text-center(width="55", nowrap="nowrap") #{__('discount')}
+							tbody
+						.text-center.no_data.hidden
+							p #{__('noData')}
+					.box-footer
+						img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+						span.loading.text-muted &nbsp;#{__('loadingData')}
+						i.error.text-red.fa.fa-warning.hidden
+						span.error.text-red.hidden.manualMessage
+
+
+
+	#dv-add.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title #{__('addData')} 
+						span.sp-title
+				.modal-body
+					form(role='form')
+						.form-group.col-sm-12.col-xs-12.padding-left-0.padding-right-0
+							label(for='txt') Secret Code
+							input#txt-secret_code.form-control.uppercase(type='text', placeholder='Secret Code', maxlength='6', style="text-transform: uppercase;")
+						.clearfix
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') #{__('cancel')}
+					button#btn-add_secret_code.btn.btn-primary(type='button') #{__('addData')}
+
+	#dv-sell_price.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title #{__('price')} 
+						span.sp-title
+				.modal-body
+					form(role='form')
+						.form-group.col-sm-12.col-xs-12.padding-left-0.padding-right-0
+							select#price.form-control
+								option(value="10", data-price="1", data-discount="0") #{__('channel')} 1
+								option(value="20", data-price="2", data-discount="0") #{__('channel')} 2
+								option(value="21", data-price="2", data-discount="1") #{__('channel')} 2 - 1%
+								option(value="22", data-price="2", data-discount="2") #{__('channel')} 2 - 2%
+								option(value="23", data-price="2", data-discount="3") #{__('channel')} 2 - 3%
+								option(value="24", data-price="2", data-discount="4") #{__('channel')} 2 - 4%
+								option(value="25", data-price="2", data-discount="5") #{__('channel')} 2 - 5%
+								option(value="26", data-price="2", data-discount="6") #{__('channel')} 2 - 6%
+								option(value="27", data-price="2", data-discount="7") #{__('channel')} 2 - 7%
+								if info.memberType == 'headSale' || info.memberType == 'manager'
+									option(value="30", data-price="3", data-discount="0") #{__('channel')} 3
+									option(value="31", data-price="3", data-discount="1") #{__('channel')} 3 - 1%
+									option(value="32", data-price="3", data-discount="2") #{__('channel')} 3 - 2%
+									option(value="33", data-price="3", data-discount="3") #{__('channel')} 3 - 3%
+									option(value="34", data-price="3", data-discount="4") #{__('channel')} 3 - 4%
+									option(value="35", data-price="3", data-discount="5") #{__('channel')} 3 - 5%
+									option(value="36", data-price="3", data-discount="6") #{__('channel')} 3 - 6%
+								if info.memberType == 'headSale' || info.memberType == 'manager'
+									option(value="40", data-price="4", data-discount="0") #{__('channel')} 4
+						.clearfix
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') #{__('cancel')}
+					button#btn-edit_sell_price.btn.btn-primary(type='button') #{__('ok')}

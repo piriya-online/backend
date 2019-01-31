@@ -1,0 +1,79 @@
+extends layout
+
+block content
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				.row.padding-10
+					.alert.alert-warning.padding-25.margin-right-15(role='alert')
+						h3 
+							u โปรดอ่าน
+						p "การยกเลิก การสั่งซื้อ เมื่อยกเลิกไปแล้ว ไม่สามารถแก้ไขการยกเลิกได้"
+						p.text-danger *กรุณาตรวจสอบข้อมูลก่อนทำการยกเลิก
+						p
+					
+					form.margin-top-25
+						.form-group.col-sm-3.text-danger
+							label(for='input') เลขที่คำสั่งซื้อ
+							input#txt-orderNo.form-control.txt-input.txt-require(type='text', placeholder='เลขที่คำสั่งซื้อที่ต้องการยกเลิก')
+						.form-group.col-sm-3.text-danger
+							label(for='input') &nbsp;
+							textarea#txt-remark.form-control.txt-input.txt-require(cols="20",rows="2",type='text', placeholder='หมายเหตุ')
+						.form-group.col-sm-3			
+							button#btn-submit.btn.btn-warning.margin-top-25 ตกลง
+						.form-group.col-sm-6
+							#dv-load.alert.alert-info.margin-bottom-30.text-center.hidden(role='alert')
+								img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+								span.loading.text-muted &nbsp;#{__('loadingData')}
+							#dv-done.alert.alert-success.margin-bottom-30.text-center.hidden(role='alert')
+								i.fa.fa-check-circle-o.fa-lg
+								| ได้ทำการยกเลิก เลขที่คำสั่งซื้อ
+								b#orderNolbl 
+								| เรียบร้อยแล้ว
+	
+		.row
+			.col-md-3
+				#dv-category.box.box-primary
+					.box-header
+						h3.pull-left.box-title รายการที่ยกเลิก					
+					.line
+					.box-body
+						ul#ul-month.nav.nav-pills.nav-stacked
+							li.active(data-month="0")
+								a(href="javascript:void(0)") #{__('current month')}
+							li(data-month="1")
+								a(href="javascript:void(0)") #{__('last 1 month')}
+							li(data-month="2")
+								a(href="javascript:void(0)") #{__('last 2 months')}
+							li(data-month="3")
+								a(href="javascript:void(0)") #{__('last 3 months')}
+			
+			.col-md-9
+				.box.box-solid
+					.box-body
+						#dv-loading.callout.callout-info.text-center
+							img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+							span.loading.text-muted &nbsp;#{__('loadingData')}
+
+						#dv-no_data.callout.callout-danger.text-center.hidden
+							span.loading.text-muted &nbsp;#{__('noData')}
+
+						.table-responsive.wait.hidden
+							table#tb-result.table.table-striped.table-condensed.table-hover.wait.hidden
+								thead
+									tr.font-sm
+										th.text-center(width="92") #{__('order number')}
+										th.text-center(width="110") วันที่ยกเลิก
+										th #{__('firstname')}
+										th #{__('shop name')}
+										th(width="100") หมายเหตุ
+										th.text-center(width="100") ยกเลิกโดย
+								tbody
+	
+	#modal-alert.modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content.padding-10				
+				.text-center
+					p#msg-alert ...
+					button.btn.btn-default(type='button', data-dismiss='modal') Close
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')

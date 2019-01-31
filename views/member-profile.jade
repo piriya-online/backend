@@ -1,0 +1,168 @@
+extends layout
+
+block content
+
+	input#role-administrator(type='hidden', value="#{__('role-administrator')}")
+	input#role-dealer(type='hidden', value="#{__('role-dealer')}")
+	input#role-developer(type='hidden', value="#{__('role-developer')}")
+	input#role-guest(type='hidden', value="#{__('role-guest')}")
+	input#role-headSale(type='hidden', value="#{__('role-headSale')}")
+	input#role-owner(type='hidden', value="#{__('role-owner')}")
+	input#role-owner-wk(type='hidden', value="#{__('role-owner-wk')}")
+	input#role-manager(type='hidden', value="#{__('role-manager')}")
+	input#role-member(type='hidden', value="#{__('role-member')}")
+	input#role-officer(type='hidden', value="#{__('role-officer')}")
+	input#role-sale(type='hidden', value="#{__('role-sale')}")
+	input#role-purchasing(type='hidden', value="#{__('role-purchasing')}")
+	input#role-sub-purchasing(type='hidden', value="#{__('role-sub-purchasing')}")
+	input#role-shop(type='hidden', value="#{__('role-shop')}")
+	input#role-accounting(type='hidden', value="#{__('role-accounting')}")
+	input#role-claim(type='hidden', value="#{__('role-claim')}")
+	input#role-transport(type='hidden', value="#{__('role-transport')}")
+	input#role-microshop(type='hidden', value="#{__('role-microshop')}")
+	input#role-channel(type='hidden', value="#{__('role-channel')}")
+	input#role-purchasing-kingit(type='hidden', value="#{__('role-purchasing-kingit')}")
+	input#role-officer-kingit(type='hidden', value="#{__('role-officer-kingit')}")
+	input#role-shop-kingit(type='hidden', value="#{__('role-shop-kingit')}")
+	input#role-sale-officer(type='hidden', value="#{__('role-sale-officer')}")
+
+	.row
+		.col-md-5
+			.box.box-primary
+				.box-header
+					h3.box-title #{__('primaryProfile')}
+				.box-body
+					form.form-horizontal.fm-change_data
+						.form-group
+							label.col-sm-3.control-label(for='input') #{__('username')}
+							.col-sm-9
+								input#username.form-control(type='text', disabled, placeholder="#{__('username')}", value="#{info.username}", data-tab="Member")
+						.form-group
+							label.col-sm-3.control-label(for='input') #{__('firstname')}
+							.col-sm-9
+								input#firstname.form-control(type='text', placeholder="#{__('firstname')}", value="#{info.firstname}", data-tab="Member")
+						.form-group
+							label.col-sm-3.control-label(for='input') #{__('lastname')}
+							.col-sm-9
+								input#lastname.form-control(type='text', placeholder="#{__('lastname')}", value="#{info.lastname}", data-tab="Member")
+						.form-group
+							label.col-sm-3.control-label(for='input') #{__('nickname')}
+							.col-sm-9
+								input#nickname.form-control(type='text', placeholder="#{__('nickname')}", value="#{info.nickname}", data-tab="Member")
+						.form-group
+							label.col-sm-3.control-label(for='input') #{__('gender')}
+							.col-sm-9
+								label.radio-inline.padding-left-0
+									if info.gender == 1
+										input#male(type='radio', name='gender', value="1", checked, data-tab="Member")
+									else
+										input#male(type='radio', name='gender', value="1", data-tab="Member")
+									&nbsp; #{__('male')}
+								label.radio-inline
+									if info.gender == 0
+										input#female(type='radio', name='gender', value="0", checked, data-tab="Member")
+									else
+										input#female(type='radio', name='gender', value="0", data-tab="Member")
+									&nbsp; #{__('female')}
+						.form-group
+							label.col-sm-3.control-label(for='input') #{__('email')}
+							.col-sm-9
+								.input-group
+									.input-group-addon
+										i.fa.fa-envelope-o
+									input#email.form-control(type='text', placeholder="#{__('email')}", value="#{info.email}", data-tab="Member")
+						.form-group
+							label.col-sm-3.control-label(for='input') #{__('mobilePhoneNumber')}
+							.col-sm-9
+								.input-group
+									.input-group-addon
+										i.fa.fa-phone
+									input#mobile.form-control(type='text', placeholder="#{__('mobilePhoneNumber')}", value="#{info.mobile}", data-tab="Member")
+				.box-footer.hidden
+					img.loading.hidden.top-2(src="/images/icons/loading.gif", alt="loading") 
+					span.loading.hidden.text-muted &nbsp;#{__('updatingData')}
+					i.error.text-red.fa.fa-warning.hidden
+					span.error.text-red.hidden.manualMessage
+					i.success.hidden.text-green.fa.fa-check-circle
+					span.success.hidden.text-green.manualMessage &nbsp;#{__('updateSuccess')}
+
+		.col-md-4
+			.box
+				.box-header
+					h3.box-title #{__('generalInfo')}
+				.box-body
+					table(align="center")
+						tr
+							td.text-right
+								| #{__('registerDate')} : &nbsp;
+							td
+								|  #{info.addDate}
+						if info.updateDate
+							tr
+								td.text-right
+									| #{__('updateDate')}  : &nbsp;
+								td
+									|  #{info.updateDate}
+						tr
+							td.text-right
+								| #{__('loginDate')}  : &nbsp;
+							td
+								|  #{info.loginDate}
+						tr
+							td.text-right
+								| #{__('loginCount')}  : &nbsp;
+							td
+								|  #{info.loginCount} #{__('times')}
+
+			.box
+				.box-header
+					h3.box-title #{__('change password')}
+				.box-body
+					form.form-horizontal
+						.form-group
+							label.col-sm-6.control-label(for='input') #{__('current password')}
+							.col-sm-6
+								input#hd-username(type='hidden', value=info.username)
+								input#old_password.form-control(type='password', placeholder="#{__('current password')}")
+						.form-group
+							label.col-sm-6.control-label(for='input') #{__('new password')}
+							.col-sm-6
+								input#password.form-control(type='password', placeholder="#{__('new password')}")
+						.form-group
+							label.col-sm-6.control-label(for='input') #{__('retype password')}
+							.col-sm-6
+								input#password2.form-control(type='password', placeholder="#{__('retype password')}")
+						.form-group
+							label.col-sm-6.control-label(for='input') 
+							.col-sm-6
+								#btn-change_password.btn.btn-default.btn-block #{__('change password')}
+				#dv-password.box-footer.hidden
+					span#sp-passwordDifferent.hidden.text-red #{__('passwordDifferent')}
+					span#sp-pleaseFillAll.hidden.text-red #{__('pleaseFillAll')}
+					span#sp-currentPasswordInvalid.hidden.text-red #{__('currentPasswordInvalid')}
+					span#sp-loadingData.hidden.text-info
+						img.top-2(src="/images/icons/loading.gif", alt="loading")  
+						|  #{__('loadingData')}
+					span#sp-changePasswordSuccess.hidden.text-green #{__('changePasswordSuccess')}
+
+		.col-md-3
+			.box.box-solid.bg-light-blue
+				.box-header
+					h3.box-title.text-center.box-center-title #{__('memberId')} : 
+						b#memberId #{info.id}
+						
+			if info.memberType == 'member' && info.secretCode != ''
+				.box.box-solid.bg-aqua
+					.box-header
+						h3.box-title.text-center.box-center-title Secret Code : 
+							b #{info.secretCode}
+
+			if info.memberTypeCount > 1
+				.box
+					.box-header
+						h3.box-title #{__('memberRoles')} (#{info.memberTypeCount})
+					.box-body
+						.text-center
+							i.fa.fa-refresh.fa-spin.loadRoles
+							span.message.hidden #{__('loginAs')}
+						br

@@ -1,0 +1,127 @@
+extends layout
+
+block content
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				.row.padding-10
+					form#form-select.col-sm-12 
+						.form-group.col-sm-3.text-danger
+							label(for='input') #{__('Branch')}	
+							select#cbb-shop.select-shop.form-control.col-sm-3
+					ul.nav.nav-tabs(role='tablist')
+						li.active(role='presentation')
+							a(href='#a', aria-controls='a', role='tab', data-toggle='tab') #{__('Unpaid')}
+						li(role='presentation')
+							a(href='#b', aria-controls='b', role='tab', data-toggle='tab') #{__('Paid')}
+					
+									
+					.tab-content
+						#a.tab-pane.active.margin-top-20(role='tabpanel')
+							#dv-loading_data.text-center
+								img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+								span.loading.text-muted &nbsp;#{__('loadingData')}					
+							#dv-no_data.text-center.hidden
+								span.loading.text-muted &nbsp;#{__('noData')}
+							.wait.hidden
+								.row
+									.col-md-8
+									.col-md-4.text-right
+										h3.col-md-12
+											i#exportExlunpaid.fa.fa-file-excel-o.pointer
+								table#tb-result_unpaid.table.table-bordered.table-condensed.table-hover.table2excel-unpaid
+									thead
+										tr												
+											th.text-center(width="100") #{__('Bill Number')}
+											th.text-center(width="100") #{__('Customer Name')}
+											th.text-center(width="100") #{__('Sell Date')}
+											th.text-center(width="100") #{__('Due Date')}
+											th.text-center(width="100") #{__('Amount')}
+											th.text-center(width="100") #{__('Sell By')}
+									tbody
+									thead
+										tr
+											th.text-center(width="100" colspan="4") #{__('Summary')}
+											th#sumTotal.text-center(width="100")
+											th.text-center(width="100")
+											
+						#b.tab-pane.margin-top-20(role='tabpanel')
+							.row
+								.col-md-8						
+									form#form-select2.col-sm-12
+										.form-group.col-sm-3.text-danger
+											label(for='input') #{__('Previous')}	
+											select#selectPrevious.form-control.col-sm-3
+												option(value='0') #{__('current month')}
+												option(value='1') 1 #{__('Month')}
+												option(value='2') 2 #{__('Months')}
+												option(value='3') 3 #{__('Months')}
+												option(value='4') 4 #{__('Months')}
+												option(value='5') 5 #{__('Months')}
+												option(value='6') 6 #{__('Months')}
+												option(value='7') 7 #{__('Months')}
+												option(value='8') 8 #{__('Months')}
+												option(value='9') 9 #{__('Months')}
+												option(value='10') 10 #{__('Months')}
+												option(value='11') 11 #{__('Months')}
+												option(value='12') 12 #{__('Months')}
+								.col-md-4.text-right
+									h3.col-md-12
+										i#exportExlpaid.fa.fa-file-excel-o.pointer
+							#dv-loading_data2.text-center
+								img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+								span.loading.text-muted &nbsp;#{__('loadingData')}					
+							#dv-no_data2.text-center.hidden
+								span.loading.text-muted &nbsp;#{__('noData')}
+							.wait2.hidden
+								table#tb-result_paid.table.table-bordered.table-condensed.table-hover.table2excel-paid
+									thead
+										tr												
+											th.text-center(width="100") #{__('Bill Number')}
+											th.text-center(width="100") #{__('Customer Name')}
+											th.text-center(width="100") #{__('Sell Date')}
+											th.text-center(width="100") #{__('Amount')}
+											th.text-center(width="100") #{__('Sell By')}
+											th.text-center(width="100") #{__('Paid Date')}
+											th.text-center(width="100") #{__('Paid Price')}
+											th.text-center(width="100") #{__('Paid By')}
+											th.text-center(width="100") #{__('Remark')}
+									tbody
+									thead
+										tr
+											th.text-center(width="100" colspan="3") #{__('Summary')}
+											th#sumTotalAmount.text-center(width="100")
+											th.text-center(width="100")
+											th.text-center(width="100")
+											th#sumTotalPaidPrice.text-center(width="100")
+											th.text-center(width="100")
+											th.text-center(width="100")
+	
+	#dv-input_payment.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title #{__('Payment')} 
+					h2#billNumber.text-bold.text-center.text-red
+				.modal-body
+					form
+						.text-center.text-muted
+							b #{__('Total')} 
+							b#totalPrice
+							input#totalPrice-val.hidden
+						br
+						.input-group
+							span.input-group-addon ฿
+							input#txt-money.form-control(type='text', value='', placeholder="#{__('Amount')}")
+						br
+						textarea#txt-remark.form-control(value='',placeholder="#{__('Remark')}")
+				.modal-footer
+					.input-group
+						span.input-group-btn
+							button.btn-save.btn.btn-warning.disabled(type='button')
+								i.fa.fa-check-circle
+								|   #{__('save data')}
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')

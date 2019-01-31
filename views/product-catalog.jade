@@ -1,0 +1,82 @@
+extends layout
+
+block content
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		#dv-catalog.box.box-solid.transition-bg.hidden
+			.box-body
+				.pull-left.margin-top-5  
+					b.text-light-blue  สินค้าในแคตตาล็อก  
+					i.fa.fa-angle-right
+					span.sp-no_item
+						|   ไม่มี
+					span.sp-has_item.hidden
+						|  &nbsp;
+						b#items-qty.text-red 0
+						|  #{__('item(s)')}
+				.pull-right.sp-has_item.hidden
+					|  &nbsp; 
+					a.btn.btn-warning.btn-sm(href="/product/catalog-detail", role="button") แคตตาล็อก
+				.clearfix
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				.row.padding-10
+					#dv-loading.callout.callout-info.text-center
+						img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+						span.loading.text-muted &nbsp;#{__('loadingData')}				
+						
+					form#form-select.hidden 
+						.form-group.col-sm-3.text-danger
+							label(for='input') หมวดหมู่สินค้า*
+							select#cbb-category.form-control 
+						.form-group.col-sm-3.text-danger
+							label(for='input') ราคาทุน
+							select#selectPrice.form-control.col-sm-3
+								option(value='0') #{__('retailPrice')}
+								option(value='1') #{__('wholesalePrice')} 1
+								option(value='2') #{__('wholesalePrice')} 2								
+								option(value='3') #{__('wholesalePrice')} 3
+								option(value='6') #{__('Chain Vat')}
+								option(value='4') #{__('wholesalePrice')} 4
+								option(value='7') #{__('wholesalePrice')} 4.5
+								option(value='5') #{__('wholesalePrice')} 5
+						.form-group.col-sm-3.text-danger
+							label(for='input') ราคาSRP
+							select#priceSRP.form-control.col-sm-3
+								option(value='0') #{__('retailPrice')}
+								option(value='1') #{__('wholesalePrice')} 1
+								option(value='2') #{__('wholesalePrice')} 2
+								option(value='3') #{__('wholesalePrice')} 3
+								option(value='6') #{__('Chain Vat')}
+								option(value='4') #{__('wholesalePrice')} 4
+								option(value='7') #{__('wholesalePrice')} 4.5
+								option(value='5') #{__('wholesalePrice')} 5
+						.form-group.col-sm-3.text-center
+							span#btn-submit.btn.btn-primary.margin-top-25
+								i.fa.fa-search
+					
+					#dv-loading_data.text-center.hidden
+						img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+						span.loading.text-muted &nbsp;#{__('loadingData')}					
+					#dv-no_data.callout.callout-danger.text-center.hidden
+						span.loading.text-muted &nbsp;#{__('noData')}
+					
+					.wait.hidden
+						.text-center
+							H1 Price List Remaxthailand
+						table#tb-result.table.table-striped.table-condensed.table-hover.wait.hidden
+							thead
+								tr
+									th.text-center(width="10") เลือก
+									th.text-center(width="10") ลำดับ
+									th.text-center(width="20") รหัสสินค้า (SKU)
+									th.text-center(width="90") ชื่อสินค้า
+									th.text-center(width="50") รูปสินค้า
+									th.text-center(width="20") ราคาทุน
+									th.text-center(width="20") ราคาSRP
+				
+							tbody
+	
+	p#scroll-top
+		a(href='#')
+			i.fa.fa-chevron-up

@@ -1,0 +1,122 @@
+extends layout
+
+block content
+	.row
+		.col-xs-2.col-sm-2.col-md-2.col-lg-2
+			.box.box-success
+				.box-body
+					button#btn-daily.btn.btn-responsive.btn-primary.btn-block
+						| รายวัน
+					button#btn-monthly.btn.btn-responsive.btn-warning.btn-block
+						| รายเดือน
+					button#btn-summary.btn.btn-responsive.btn-danger.btn-block
+						| รายสินค้า
+		.col-xs-10.col-sm-10.col-md-10.col-lg-10
+			.box.box-primary#data-daily
+				.box-body
+					.row.padding-10
+						form#form-select.col-md-12
+							b.text-danger.col-md-4.col-md-offset-4 #{__('Date')}
+							.form-group.col-md-4.col-md-offset-4
+								.input-group
+									input#date.datepicker.form-control.col-sm-3(data-date-format="dd/mm/yyyy")
+									span.input-group-btn
+										button#btn-submit.btn.btn-primary(type="button")
+											i.fa.fa-search
+						#dv-loading_data-daily.text-center.hidden
+								i.fa.fa-refresh.fa-spin.fa-fw.fa-4x
+						div-result_header.col-md-4.col-md-offset-4.hidden
+							b สินค้ารอเคลมจากเว็บทั้งหมด
+								#totalWC.pull-right
+							p 
+							b สินค้ารอเคลมจากรับเข้าเองทั้งหมด
+								#totalAC.pull-right
+							p 
+							b สินค้ารอเคลมจากหน้าร้านผ่านระบบ
+								#totalShop.pull-right
+							p
+							b รวม
+								#totalQty.pull-right
+							p.text-center -------------------------------
+							b#data1 ข้อมูลจากเว็บ
+							#addWC.pull-right
+							p
+							b#data2 รับเข้าเอง
+							#addAC.pull-right
+							p
+							b#data3 ของเคลมระหว่างดำเนินการ
+							#totalQty2.pull-right
+							p
+							b#data4 ผิดเงื่อนไขการเคลม
+							#reject.pull-right
+							p
+							b#data5 ของเคลมเสร็จ วันที่
+							#finish.pull-right
+							p
+							b#data6 ของเคลม Shop วันที่
+							#fnShop.pull-right
+							p
+						div-result_detail.col-md-6.col-md-offset-3
+							div-table1.hidden
+								h4 ข้อมูลรับเคลมสินค้าเอง
+								table#tb-result.table.table-bordered.table-condensed.table-hover
+									thead
+										tr												
+											th.text-center(width="100") #{__('name')}
+											th.text-center(width="100") #{__('quantity')}
+									tbody
+							div-table2.hidden
+								h4 ของเคลมเสร็จ (ข้อมูลที่รับเข้าเอง)
+								table#tb-result2.table.table-bordered.table-condensed.table-hover
+									thead
+										tr												
+											th.text-center(width="100") #{__('name')}
+											th.text-center(width="100") #{__('quantity')}
+									tbody
+							div-table3.hidden
+								h4 ผิดเงื่อนไขการเคลม (ข้อมูลที่รับเข้าเอง)
+								table#tb-result3.table.table-bordered.table-condensed.table-hover
+									thead
+										tr												
+											th.text-center(width="100") #{__('name')}
+											th.text-center(width="100") #{__('quantity')}
+									tbody
+			.box.box-warning#data-monthly.hidden
+				.box-body
+					.row.padding-10
+						.col-md-12
+							form#form-select.col-md-12
+								b.text-danger.col-md-4.col-md-offset-4 #{__('Month')}
+								.form-group.col-md-4.col-md-offset-4
+									.input-group
+										input#date2.datepicker2.form-control.col-sm-3(data-date-format="mm/yyyy")
+										span.input-group-btn
+											button#btn-submit2.btn.btn-primary(type="button")
+												i.fa.fa-search
+						.col-md-12
+							#dv-loading_data-monthly.text-center.hidden
+								i.fa.fa-refresh.fa-spin.fa-fw.fa-4x
+							.text-center#dv-result-monthly
+								p#costPrice
+								p#customerPrice
+								p#shopPrice
+							.table-responsive
+								table#tb-result-monthly.table.table-striped.table-condensed.table-hover.hidden
+									thead
+										tr
+											th(width="80") ช็อป
+											th.text-center(width="10") ยี่ห้อ
+											th.text-center(width="20") สถานะ
+											th.text-center(width="10") มูลค่า
+									tbody
+			.box.box-danger#data-summary.hidden
+				.box-body
+					.row.padding-10
+						.col-md-12
+							form#form-select.col-md-12
+								b.text-danger.col-md-4.col-md-offset-4 #{__('Category')}
+								.form-group.col-md-4.col-md-offset-4
+									select#cbb-category.form-control
+						.col-md-12
+							#dv-loading-summary.text-center.hidden
+								i.fa.fa-refresh.fa-spin.fa-fw.fa-4x

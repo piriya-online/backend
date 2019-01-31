@@ -1,0 +1,54 @@
+extends layout
+
+block content
+
+	.box
+
+		.box-body.table-responsive.no-padding
+			form#form-select.col-sm-12
+				.form-group.col-sm-3.text-danger
+					label(for='input') #{__('Brand')}	
+					select#cbb-brand.form-control.col-sm-3
+				.form-group.col-sm-3.text-danger
+					label(for='input') #{__('Category')}
+					select#cbb-category.form-control.col-sm-3
+				
+			#dv-loading.callout.callout-info.text-center
+				img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+				span.loading.text-muted &nbsp;#{__('loadingData')}
+			
+			.wait.hidden
+				table#tb-result.table.table-striped.table-condensed.table-hover.wait.hidden
+					thead
+						tr.font-sm
+							th.text-center(width="70" colspan="2") #{__('Product Name')}													
+							th.text-right(width="70") #{__('Stock')}
+							th.text-right(width="70") #{__('retailPrice')}
+								br
+								small.price
+							th.text-right(width="70") #{__('wholesalePrice')} 1
+								br
+								small.price1
+							th.text-right(width="70") #{__('wholesalePrice')} 2
+								br
+								small.price2
+							th.text-right(width="70") #{__('wholesalePrice')} 3
+								br
+								small.price3
+							th.text-right(width="70") #{__('Chain')}
+								br
+								small.priceChain
+							th.text-right(width="70") #{__('wholesalePrice')} 4
+								br
+								small.price4
+							th.text-right(width="70") #{__('Price4.5')}
+								br
+								small.priceChainSrp
+							th.text-right(width="70") #{__('wholesalePrice')} 5
+								br
+								small.price5
+							th#th-cost.th-cost.text-right.hidden(width="70") #{__('cost')}
+					tbody
+					tfoot#dv-no_data.hidden
+						td(colspan=12)
+							div.callout.callout-danger.text-center.loading.text-muted &nbsp;#{__('noData')}

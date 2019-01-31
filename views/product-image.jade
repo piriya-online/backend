@@ -1,0 +1,43 @@
+extends layout
+
+block content
+
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				.row.padding-10
+					ul.nav.nav-tabs(role='tablist')
+						li.active(role='presentation')
+							a(href='#image', aria-controls='sales', role='tab', data-toggle='tab') รูปภาพ
+						li(role='presentation')
+							a(href='#youtube', aria-controls='wholesales', role='tab', data-toggle='tab') ยูทูบ
+					.tab-content
+						#image.tab-pane.active.margin-top-20(role='tabpanel')
+							#dv-loading.callout.callout-info.text-center.hidden
+								img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+								span.loading.text-muted &nbsp;#{__('loadingData')}	
+							
+							.table-responsive
+								table#tb-result.table.table-bordered.table-condensed.table-hover.wait.hidden
+									thead
+										tr
+											th.text-center(width="10") #{__('sku')}
+											th.text-center(width="50") #{__('productName')}
+											th.text-center(width="20") #{__('productCategory')}
+											th.text-center(width="20") #{__('Brand')}
+									tbody
+						#youtube.tab-pane.margin-top-20(role='tabpanel')
+							#dv-loading2.callout.callout-info.text-center.hidden
+								img.loading2.top-2(src="/images/icons/loading.gif", alt="loading") 
+								span.loading2.text-muted &nbsp;#{__('loadingData')}	
+							
+							.table-responsive
+								table#tb-result2.table.table-bordered.table-condensed.table-hover.wait2.hidden
+									thead
+										tr
+											th.text-center(width="10") #{__('sku')}
+											th.text-center(width="50") #{__('productName')}
+											th.text-center(width="20") #{__('productCategory')}
+											th.text-center(width="20") #{__('Brand')}
+											th.text-center(width="20") YouTube
+									tbody

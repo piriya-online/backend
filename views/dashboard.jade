@@ -1,0 +1,313 @@
+extends layout
+
+block content
+
+	#dv-loading.col-md-9
+
+		if info.memberType != 'xxx'
+			#dv-summary.row
+				.col-md-3.col-xs-6
+					.small-box.bg-green
+						.inner
+							h3#numberNews 0
+							p #{__('News')}
+						.icon
+							i.ion-android-textsms
+						a.news.small-box-footer(href='#news')
+							| #{__('More Info')} 
+							i.fa.fa-arrow-circle-right
+
+				.col-md-3.col-xs-6
+					.small-box.bg-aqua
+						.inner
+							h3#numberBooking 0
+							p #{__('bookingList')}
+						.icon
+							i.ion.ion-bag
+						a.order_booking.small-box-footer(href='#booking')
+							| #{__('More Info')} 
+							i.fa.fa-arrow-circle-right
+
+				.col-md-3.col-xs-6
+					.small-box.bg-red
+						.inner
+							h3#numberWallet 0
+							p #{__('Remax Wallet')}
+						.icon
+							i.ion.ion-social-bitcoin
+						a.small-box-footer(href='#')
+							| #{__('More Info')} 
+							i.fa.fa-arrow-circle-right
+
+				.col-md-3.col-xs-6
+					.small-box.bg-orange
+						.inner
+							h3#numberOrderHistory 0
+							p #{__('Order History')}
+						.icon
+							i.ion.ion-android-time
+						a.order_history.small-box-footer(href='#history')
+							| #{__('More Info')} 
+							i.fa.fa-arrow-circle-right 
+				if info.memberType == 'shop'
+					.col-md-3.col-xs-6.box-shop.hidden
+						.small-box.bg-green
+							.inner
+								h3#todayssales 0
+								p #{__("Today's sales")}
+							.icon
+								i.ion-social-bitcoin
+							a.todayssales.small-box-footer(href='#todayssales')
+								| #{__('More Info')} 
+								i.fa.fa-arrow-circle-right
+
+					.col-md-3.col-xs-6.box-shop.hidden
+						.small-box.bg-aqua
+							.inner
+								h3#salesthismonth 0
+								p #{__('Sales this Month')}
+							.icon
+								i.ion.ion-social-bitcoin
+							a.salesthismonth.small-box-footer(href='#salesthismonth')
+								| #{__('More Info')} 
+								i.fa.fa-arrow-circle-right
+
+					.col-md-3.col-xs-6.box-shop.hidden
+						.small-box.bg-red
+							.inner
+								h3#productsreturn 0
+								p #{__('Products Return this Month')}
+							.icon
+								i.ion.ion-cube
+							a.productsreturn.small-box-footer(href='#productsreturn')
+								| #{__('More Info')} 
+								i.fa.fa-arrow-circle-right
+
+					.col-md-3.col-xs-6.box-shop.hidden
+						.small-box.bg-orange
+							.inner
+								h3#debtor 0
+								p #{__('Debtor')}
+							.icon
+								i.ion.ion-person
+							a.debtor.small-box-footer(href='#debtor')
+								| #{__('More Info')} 
+								i.fa.fa-arrow-circle-right 
+				
+			#dv-detail.row
+				.col-md-12.col-xs-12
+
+					input#msg-cancel(type='hidden', value="#{__('cancel')}")
+					input#msg-paid(type='hidden', value="#{__('paid')}")
+					input#msg-unpaid(type='hidden', value="#{__('unpaid')}")
+					input#msg-pack(type='hidden', value="#{__('pack')}")
+					input#msg-unpack(type='hidden', value="#{__('unpack')}")
+					input#msg-awaiting_payment(type='hidden', value="#{__('Awaiting Payment')}")
+					input#msg-awaiting_stock(type='hidden', value="#{__('Awaiting Stock')}")
+					input#msg-shipped(type="hidden", value="#{__('shipped')}")
+					input#msg-awaiting_shipment(type="hidden", value="#{__('awaiting shipment')}")
+					input#msg-total(type='hidden', value="#{__('total')}")
+					input#msg-orderNow(type="hidden", value="#{__('orderNow')}")
+					input#msg-cancel(type="hidden", value="#{__('cancel')}")
+
+					.box.box-primary.order_booking.hidden
+						.box-header
+							h3.box-title #{__('bookingList')}
+						.box-body.table-responsive
+							table.table.table-condensed.table-hover(width="100%")
+								thead
+									tr.font-sm
+										th.text-center(width="120")  #{__('bookingDate')}
+										th #{__('Product Name')}
+										th.text-right(width="55")  #{__('piece(s)')}
+										th.text-right(width="65")  
+								tbody
+							
+							#dv-no_data.callout.callout-danger.text-center.hidden
+								b.text-red
+									i.fa.fa-warning
+									|  #{__('noData')}
+
+							hr
+							h3.box-title เงื่อนไขการจองสินค้า 
+								small (สำหรับสินค้าหมดชั่วคราว หรือ สินค้าใหม่เท่านั้น)
+							ol.font-sm
+								li เมื่อสินค้าเข้าคลังสินค้าแล้ว ลูกค้าต้อง
+									b.text-red ทำการยืนยัน 
+									เพื่อสั่งซื้อตามจำนวนที่ต้องการอีกครั้ง
+								li หากลูกค้าไม่ยืนยันจำนวนสั่งซื้อ หลังจากสินค้าเข้า 
+									b.text-red 3 วัน 
+									ระบบจะยกเลิกรายการนั้นๆ โดยอัตโนมัติ
+								li เนื่องจากการจองสินค้าทางบริษัท
+									b.text-red ไม่มีการเก็บเงินมัดจำ 
+									หากเกิดเหตุไม่สามารถจัดส่งได้ตามจำนวนที่จอง 
+									b.text-orange บริษัทขอสงวนสิทธิ์ในการเปลี่ยนแปลงหรือยกเลิกเงื่อนไขโดยมิต้องแจ้งให้ทราบล่วงหน้า
+
+					.box.box-primary.order_history.hidden
+						.box-header
+							h3.box-title #{__('Order History')}
+						.box-body.table-responsive
+							table.table.table-condensed.table-hover(width="100%")
+								thead
+									tr.font-sm
+										th(width="95")  #{__('order number')}
+										th.text-center(width="120")  #{__('orderDate')}
+										th #{__('status')}
+										th.text-center(width="65")  #{__('item(s)')}
+										th.text-center(width="55")  #{__('piece(s)')}
+										th.text-center(width="65")  #{__('price')}
+										th.text-center(width="65")  #{__('shipping')}
+										th.text-right(width="85")  #{__('grand total')}
+								tbody
+
+					.box.box-success.news.hidden
+						.box-header
+							h3.box-title #{__('News')}
+						.box-body.table-responsive
+							table.table.table-condensed.table-hover(width="100%")
+								thead
+									tr.font-sm
+										th.text-center(width="10") #{__('Date')}
+										th.text-left(width="300") #{__('message')}
+								tbody
+					
+					.box.box-success.todayssales.hidden
+						.box-header
+							h3.box-title #{__("Today's sales")}
+						.box-body.table-responsive
+							table.table.table-bordered.table-condensed.table-hover(width="100%")
+								thead
+									tr
+										th.text-center(width="10") #{__('Date')}
+										th.text-center(width="20") #{__('Sell No')}
+										th.text-center(width="80") #{__('Customer Name')}
+										th.text-center(width="20") #{__('price')}
+										th.text-center(width="20") #{__('discount')}
+										th.text-center(width="20") #{__('grand total')}
+										th.text-center(width="40") #{__('Payment')}
+										th.text-center(width="60") #{__('Employee Name')}
+								tbody
+					
+					.box.box-primary.salesthismonth.hidden
+						.box-header
+							h3.box-title #{__('Sales this Month')}
+						.box-body.table-responsive
+							table.table.table-bordered.table-condensed.table-hover(width="100%")
+								thead
+									tr
+										th.text-center(width="10") #{__('Date')}
+										th.text-center(width="50") #{__('Bill')}
+										th.text-center(width="200") #{__('Cash')}
+										th.text-center(width="200") #{__('Credit')}
+										th.text-center(width="200") #{__('discount')}
+										th.text-center(width="200") #{__('Total')}
+										th.text-center(width="200") #{__('Claim')}
+								tbody
+								tfoot
+									tr
+										th.text-center(width="10") #{__('Summary')}
+										th#sumBill.text-center(width="50") 
+										th#sumCash.text-center(width="200") 
+										th#sumCredit.text-center(width="200") 
+										th#sumDiscountCash.text-center(width="200") 
+										th#sumTotal.text-center(width="200") 
+										th#sumClaim.text-center(width="200") 
+					
+					.box.box-danger.productsreturn.hidden
+						.box-header
+							h3.box-title #{__('Products Return this Month')}
+						.box-body.table-responsive
+							table.table.table-bordered.table-condensed.table-hover(width="100%")
+								thead
+									tr
+										th.text-center(width="20") #{__('Return Date')}
+										th.text-center(width="20") #{__('Sell No')}
+										th.text-center(width="20") #{__('Sell Date')}
+										th.text-center(width="60") #{__('Customer Name')}
+										th.text-center(width="100") #{__('productName')}
+										th.text-center(width="60") #{__('Barcode')}
+										th.text-center(width="20") #{__('price')}
+										th.text-center(width="60") #{__('Employee Name')}
+								tbody
+
+					.box.box-warning.debtor.hidden
+						.box-header
+							h3.box-title #{__('Debtor')}
+						.box-body.table-responsive
+							table.table.table-bordered.table-condensed.table-hover(width="100%")
+								thead
+									tr
+										th.text-center(width="100") #{__('Customer Name')}
+										th.text-center(width="100") #{__('Bill Number')}
+										th.text-center(width="100") #{__('Sell Date')}
+										th.text-center(width="100") #{__('Due Date')}
+										th.text-center(width="100") #{__('Amount')}
+										th.text-center(width="100") #{__('Sell By')}
+								tbody
+		else
+			.callout.callout-info.text-center
+				span.loading.text-muted &nbsp;#{__('welcome to new system v2')}
+
+
+	.col-md-3
+		.box.box-success.box-solid
+			.box-header
+				h3.box-title LINE Official
+			.box-body
+				center Line ID : 
+					b @RemaxThailand
+					br
+					img.img-responsive.margin-top-5.margin-bottom-5(src="/images/line-remaxthailand.png")
+				|  กรุณา Add Line เพื่อสอบถามข้อมูล และรับสิทธิพิเศษต่างๆ รวมทั้งแจ้งการชำระเงินเพื่อยืนยันคำสั่งซื้อค่ะ
+
+
+
+	#dv-input_shipping.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title #{__('shipping method')}
+				.modal-body
+					form
+						.form-group
+							span #{__('shipping method')} : 
+							strong#shippingMethod
+						.form-group
+							span #{__('Shipping - Tracking Number')} : 
+							strong#trackingNo
+						.form-group.hidden
+							select#shipping_method.form-control
+								option(value="KE", selected) #{__('Shipping - Kerry Express')}
+								option(value="SCG") SCG Express
+								option(value="CC") #{__('Shipping - Collect Call')}
+								option(value="SS") #{__('Shipping - Self Service')}
+								option(value="EMS") #{__('Shipping - EMS')}
+								option(value="RGT") #{__('Shipping - Registered')}
+				.modal-footer
+					.input-group
+						span.input-group-btn
+							a.btn-tracking.btn.btn-warning.input-EMS.input-RGT.hidden(href='http://track.thailandpost.co.th/tracking/default.aspx?lang=#{config.language}', target="_blank")
+								i.fa.fa-check-circle
+								|   #{__('Shipping - Tracking')}
+							a.btn-tracking.btn.btn-warning.input-KE.hidden(href='http://th.ke.rnd.kerrylogistics.com/shipmenttracking/', target="_blank")
+								i.fa.fa-check-circle
+								|   #{__('Shipping - Tracking')}
+
+	#modal-alert.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content.padding-10				
+				.text-center
+					p คุณแน่ใจหรือไม่ ที่จะยกเลิกการจองสินค้านี้
+					button#btnConfirm.btn.btn-default.margin-right-10(type='button') ยกเลิกการจอง
+					button.btn.btn-default(type='button', data-dismiss='modal') ปิด
+	
+	#modal-news.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-lg(role='document')
+			.modal-content.modal-content-black
+				.modal-body
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+						span.badge(aria-hidden='true') ×
+					img.img-responsive.no-radius(src='https://src.remaxthailand.co.th/img/Remax/web/news/newyear_holidays.jpg')

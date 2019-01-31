@@ -1,0 +1,74 @@
+extends layout
+
+block content
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		#accordion.panel-group(role='tablist', aria-multiselectable='true')
+			.panel.panel-default
+				#headingOne.panel-heading(role='tab')
+					h4.panel-title
+						a#a-sales(data-toggle='collapse', data-parent='#accordion', href='#sales', aria-expanded='false')
+							strong #{__('Daily Sales')}
+				#sales.panel-collapse.collapse(role='tabpanel')
+					.panel-body
+						ul.nav.nav-tabs(role='tablist')
+							li.active(role='presentation')
+								a(href='#sales', aria-controls='sales', role='tab', data-toggle='tab') #{__('Daily Sales')}
+										
+						.tab-content
+							#dsales.tab-pane.active.margin-top-20(role='tabpanel')
+								#dv-loading.callout.callout-info.text-center.hidden
+									img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+									span.loading.text-muted &nbsp;#{__('loadingData')}	
+								form#form-select.col-sm-12
+									.form-group.col-sm-3.text-danger
+										label(for='input') #{__('Branch')}	
+										select.select-shop#cbb-microshop.form-control
+									.form-group.col-sm-3.text-danger
+										label(for='input') #{__('Date From')}	
+										input#dateFrom.datepicker.form-control.col-sm-3(data-date-format="dd/mm/yyyy")
+									.form-group.col-sm-3.text-danger
+										label(for='input') #{__('Date To')}	
+										input#dateTo.datepicker.form-control.col-sm-3(data-date-format="dd/mm/yyyy")
+									.form-group.col-sm-3
+										span#btn-submit.btn.btn-primary.margin-top-25
+											i.fa.fa-search
+											
+								#dv-loading_data.text-center.hidden
+									img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+									span.loading.text-muted &nbsp;#{__('loadingData')}					
+								#dv-no_data.text-center.hidden
+									span.loading.text-muted &nbsp;#{__('noData')}
+									
+								.wait.hidden
+									.col-sm-12
+										.box.margin-bottom-0
+											.box-body.padding-0
+												.table-responsive
+													table#tb-result.table.table-bordered.table-condensed.table-hover.wait.hidden
+														thead
+															tr
+																th.text-center(width="10") #{__('Date')}
+																th.text-center(width="50") #{__('Bill')}
+																th.text-center(width="200") #{__('Sales')}
+																th.text-center(width="200") #{__('discount')}
+																th.text-center(width="200") #{__('Total')}
+																th.text-center(width="200") #{__('Cost')}
+																th.text-center(width="200") #{__('Profit')}
+														tbody
+														thead
+															tr
+																th.text-center(width="10") #{__('Summary')}
+																th#sumBill.text-center(width="50") 
+																th#sumCash.text-center(width="200") 
+																th#sumDiscountCash.text-center(width="200") 
+																th#sumTotal.text-center(width="200") 
+																th#sumCost.text-center(width="200") 
+																th#sumProfit.text-center(width="200") 
+				
+																			
+
+	p#scroll-top
+		a(href='#')
+			i.fa.fa-chevron-up
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')
+	script(src='https://www.gstatic.com/charts/loader.js')

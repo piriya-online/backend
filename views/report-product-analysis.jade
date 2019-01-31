@@ -1,0 +1,43 @@
+extends layout
+
+block content
+	input#msg-total(type="hidden", value="#{__('Total')}")
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				ul.nav.nav-tabs(role='tablist')
+					li.active(role='presentation')
+						a(href='#monthlySales', aria-controls='monthlySales', role='tab', data-toggle='tab') #{__('Monthly Sales')}
+					li.hidden(role='presentation')
+						a(href='#dailySales', aria-controls='dailySales', role='tab', data-toggle='tab') #{__('Daily Sales')}
+					
+				.tab-content
+					#monthlySales.tab-pane.active(role='tabpanel')
+						.row.padding-10
+							form#form-select1.col-sm-12
+								.form-group.col-sm-3.text-danger
+									label(for='input') #{__('Month')}	
+									select#selectMonth.form-control.col-sm-3
+								.form-group.col-sm-3.text-danger
+									label(for='input') #{__('Category')}	
+									select#selectCategory.form-control.col-sm-3
+							.box.box-solid									
+								.box-body.col-sm-12
+									.col-sm-12
+										#div-monthlySaleByProductChart(style="width: 100%; height: 600px;")
+									.col-sm-12
+										#div-monthlySaleByProductHistoryChart(style="width: 100%; height: 600px;")
+
+					#dailySales.tab-pane(role='tabpanel')
+						.row.padding-10
+							form#form-select1.col-sm-12
+								.form-group.col-sm-3.text-danger
+									label(for='input') #{__('Previous')}	
+									select#selectPrevious.form-control.col-sm-3
+
+	p#scroll-top
+		a(href='#')
+			i.fa.fa-chevron-up
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')
+	script(src='https://www.gstatic.com/charts/loader.js')
+	script(src='https://www.google.com/jsapi')

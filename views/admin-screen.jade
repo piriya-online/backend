@@ -1,0 +1,80 @@
+extends layout
+
+block content
+	.row
+		.col-md-6
+
+			.box.box-primary
+				.box-header
+					h3.box-title Screen
+					.box-tools.pull-right
+						.btn.btn-default.btn-reload
+							i.fa.fa-refresh
+						.btn.btn-default.btn-add.margin-left-3
+							i.fa.fa-plus-circle
+						.btn.btn-default.btn-delete.margin-left-3
+							i.fa.fa-trash
+				.box-body
+					table#tb-screen.table.table-condensed.table-hover.font-sm
+						thead
+							th(width="25")
+							th(width="120") #{__('screen')}
+							th #{__('link')}
+							th(width="120") #{__('group')}
+							th(width="120") #{__('icon')}
+						tbody
+						tfoot
+				.box-footer
+					img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+					span.loading.text-muted &nbsp;#{__('loadingData')}
+					i.error.text-red.fa.fa-warning.hidden
+					span.error.text-red.hidden.manualMessage
+
+
+		.col-md-6
+
+			.box.box-warning
+				.box-header
+					h3.box-title Screen Mapping
+					.box-tools.pull-right
+						.form-inline
+							.form-group
+								.dropdown
+									.btn.btn-default.btn-selectScreen.dropdown-toggle(data-toggle="dropdown")
+										| #{__('screen')} 
+										span.caret
+									ul.dropdown-menu(role="menu", data-type="|")
+
+							.form-group
+								.dropdown.margin-left-3
+									.btn.btn-default.btn-selectMember.dropdown-toggle(data-toggle="dropdown")
+										| #{__('member')} 
+										span.caret
+									ul.dropdown-menu(role="menu", data-type="|")
+
+							.form-group
+								.btn.btn-default.btn-reload.margin-left-3
+									i.fa.fa-refresh
+							.form-group
+								.btn.btn-default.btn-add.margin-left-3
+									i.fa.fa-plus-circle
+							.form-group
+								.btn.btn-default.btn-delete.margin-left-3
+									i.fa.fa-trash
+				.box-body
+					table#tb-screen_mapping.table.table-condensed.table-hover.font-sm
+						thead
+							th(width="25")
+							th #{__('screen')}
+							th(width="120") #{__('member')}
+							th.text-center(width="33") #{__('level')}
+							th.text-center(width="33") #{__('add')}
+							th.text-center(width="33") #{__('editShort')}
+							th.text-center(width="33") #{__('del')}
+						tbody
+						tfoot
+				.box-footer
+					img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+					span.loading.text-muted &nbsp;#{__('loadingData')}
+					i.error.text-red.fa.fa-warning.hidden
+					span.error.text-red.hidden.manualMessage

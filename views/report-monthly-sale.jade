@@ -1,0 +1,267 @@
+extends layout
+
+block content
+	input#msg-total(type="hidden", value="#{__('Total')}")
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				ul.nav.nav-tabs(role='tablist')
+					li.active(role='presentation')
+						a(href='#a', aria-controls='sales', role='tab', data-toggle='tab') #{__('Monthly Sales by Category')}
+					li(role='presentation')
+						a(href='#d', aria-controls='dailySales', role='tab', data-toggle='tab') #{__('Daily Sales by Customer')}
+					li(role='presentation')
+						a(href='#b', aria-controls='run_rate', role='tab', data-toggle='tab') #{__('Monthly Sales by Customer')}
+					li(role='presentation')
+						a(href='#c', aria-controls='run_rate', role='tab', data-toggle='tab') #{__('Customer Order')}
+					
+				.tab-content
+					#a.tab-pane.active(role='tabpanel')
+						.row.padding-10
+							form#form-select1.col-sm-12
+								.form-group.col-sm-3.text-danger
+									label(for='input') #{__('Previous')}	
+									select#selectPrevious.form-control.col-sm-3
+										option(value='0') #{__('current month')}
+										option(value='1') 1 #{__('Month')}
+										option(value='2') 2 #{__('Months')}
+										option(value='3') 3 #{__('Months')}
+										option(value='4') 4 #{__('Months')}
+										option(value='5') 5 #{__('Months')}
+										option(value='6') 6 #{__('Months')}
+										option(value='7') 7 #{__('Months')}
+										option(value='8') 8 #{__('Months')}
+										option(value='9') 9 #{__('Months')}
+										option(value='10') 10 #{__('Months')}
+										option(value='11') 11 #{__('Months')}
+										option(value='12') 12 #{__('Months')}
+										
+								.form-group.col-sm-3.text-danger
+									label(for='input') #{__('Type')}	
+									select#selectType.form-control.col-sm-3
+										option(value='type-sale') #{__('Sales')} 
+										option(value='type-qty') #{__('Quantity')}
+										option(value='type-profit') #{__('Profit and Loss')}
+
+							.box.box-solid#box-chart1										
+								.box-body.col-sm-12
+									.col-sm-12
+										#div-chart1
+								.overlay
+
+
+												
+						#dv-monthlySaleByCategory.row.hidden					
+							.col-sm-12
+								H3
+									i#exportExl.fa.fa-file-excel-o.pointer
+								.box.margin-bottom-0
+									.box-body.padding-0
+										.table-responsive
+											table#tb-monthlySaleByCategory.table2excel.table.table-striped.margin-bottom-0
+												thead
+													tr
+														th(width="80") #{__('no')}
+														th(width="100") #{__('sku')}
+														th #{__('productName')}
+														th.text-right.data-qty(width="100") #{__('quantity')}
+														th.text-right.data-cost(width="100") #{__('cost')}
+														th.text-right.data-sale(width="100") #{__('grand total')}
+														th.text-right.data-profit(width="100") #{__('Profit')}
+												tbody
+
+					#b.tab-pane(role='tabpanel')
+						.row.padding-10
+							form#form-select2.col-sm-12
+								.form-group.col-sm-3.text-danger
+									label(for='select') #{__('Year')}	
+									select#selectYear.form-control.col-sm-3 
+								.form-group.col-sm-2
+									span#btnReload.btn.btn-default.margin-top-25
+										i.fa.fa-refresh		
+							form.col-sm-12
+								.form-group.col-sm-2
+									input#excluseWk.form-control.col-sm-3(type="checkbox", name="excluseWk", value='wk') 
+									| &nbsp;&nbsp;&nbsp;ไม่รวม WK
+								
+
+							.box.box-solid#box-chart2										
+								.box-body.col-sm-12
+									.col-sm-12
+										#div-chart2(style="width: 100%; height: 300px;")
+									.col-sm-12.padding-25
+										.table-responsive
+											table#tb-result.table.table-bordered.table-condensed.table-hover.hidden
+												thead
+													tr
+														th.text-center
+														th.text-center(width="80") #{__('Jan')}
+														th.text-center(width="80") #{__('Feb')}
+														th.text-center(width="80") #{__('Mar')}
+														th.text-center(width="80") #{__('Apr')}
+														th.text-center(width="80") #{__('May')}
+														th.text-center(width="80") #{__('Jun')}
+														th.text-center(width="80") #{__('Jul')}
+														th.text-center(width="80") #{__('Aug')}
+														th.text-center(width="80") #{__('Sep')}
+														th.text-center(width="80") #{__('Oct')}
+														th.text-center(width="80") #{__('Nov')}
+														th.text-center(width="80") #{__('Dec')}
+												tbody
+												thead
+													tr
+														th.text-center(width="100") #{__('Summary')}
+														th#sumJan.text-right(width="80") 
+														th#sumFeb.text-right(width="80") 
+														th#sumMar.text-right(width="80") 
+														th#sumApr.text-right(width="80") 
+														th#sumMay.text-right(width="80") 
+														th#sumJun.text-right(width="80") 
+														th#sumJul.text-right(width="80") 
+														th#sumAug.text-right(width="80") 
+														th#sumSep.text-right(width="80") 
+														th#sumOct.text-right(width="80") 
+														th#sumNov.text-right(width="80") 
+														th#sumDec.text-right(width="80")
+									.col-sm-12
+										#div-chartMonthlySaleDetail(style="width: 75%; height: 350px;")
+									.col-sm-12
+										#div-tableMonthlySaleDetail(style="width: 400px; display: table;margin: 0 auto;")
+											table.table.table-striped(align="center", width="400")
+												thead
+													tr
+														th(width=250) Shop
+														th.text-right Total Sales
+												tbody
+									.col-sm-12
+										#div-chartMonthlySaleHistory(style="width: 100%; height: 300px;")
+									.col-sm-12
+										#div-chart2_sellPrice(style="width: 100%; height: 300px;")
+									.col-sm-12
+										#div-chartStackPercent(style="width: 100%; height: 300px;")
+									.col-sm-12
+										#div-chart2_qty(style="width: 100%; height: 300px;")
+									.col-sm-12
+										#div-chart2_profit(style="width: 100%; height: 300px;")
+									.col-sm-12.padding-25
+										.table-responsive
+											table#tb-result_profit.table.table-bordered.table-condensed.table-hover.hidden
+												thead
+													tr
+														th.text-center
+														th.text-center(width="80") #{__('Jan')}
+														th.text-center(width="80") #{__('Feb')}
+														th.text-center(width="80") #{__('Mar')}
+														th.text-center(width="80") #{__('Apr')}
+														th.text-center(width="80") #{__('May')}
+														th.text-center(width="80") #{__('Jun')}
+														th.text-center(width="80") #{__('Jul')}
+														th.text-center(width="80") #{__('Aug')}
+														th.text-center(width="80") #{__('Sep')}
+														th.text-center(width="80") #{__('Oct')}
+														th.text-center(width="80") #{__('Nov')}
+														th.text-center(width="80") #{__('Dec')}
+												tbody
+												thead
+													tr
+														th.text-center(width="100") #{__('Summary')}
+														th#sumJan_profit.text-right(width="80") 
+														th#sumFeb_profit.text-right(width="80") 
+														th#sumMar_profit.text-right(width="80") 
+														th#sumApr_profit.text-right(width="80") 
+														th#sumMay_profit.text-right(width="80") 
+														th#sumJun_profit.text-right(width="80") 
+														th#sumJul_profit.text-right(width="80") 
+														th#sumAug_profit.text-right(width="80") 
+														th#sumSep_profit.text-right(width="80") 
+														th#sumOct_profit.text-right(width="80") 
+														th#sumNov_profit.text-right(width="80") 
+														th#sumDec_profit.text-right(width="80")
+								.overlay
+					#c.tab-pane(role='tabpanel')
+						.row.padding-10
+							.col-sm-9
+								#dv-province-chart.box.box-solid.margin-bottom-0
+									.box-body.no-padding
+										#chart_div(style="width: 100%; height: 500px;")
+									.overlay
+										
+							.col-md-3
+								#dv-top-sell.box.box-solid.margin-bottom-0.hidden
+									.box-header
+										.form-group.margin-bottom-0
+											select.select-memberType.form-control
+												option(data-type="",value=0, selected) #{__('Customer Type')} : #{__('all')}
+												option(data-type="dealer",value=1) #{__('Customer Type')} : #{__('Dealer')}
+												option(data-type="shop",value=2) #{__('Customer Type')} : #{__('Shop')}
+											select.select-month.form-control.margin-top-5
+												option(data-month="0", value=0, selected) #{__('current month')}
+												option(data-month="1", value=1) #{__('last 1 month')}
+												option(data-month="2", value=2) #{__('last 2 months')}
+												option(data-month="3", value=3) #{__('last 3 months')}
+												option(data-month="4", value=4) #{__('last 4 months')}
+												option(data-month="5", value=5) #{__('last 5 months')}
+												option(data-month="6", value=6) #{__('last 6 months')}
+												option(data-month="7", value=7) #{__('last 7 months')}
+												option(data-month="8", value=8) #{__('last 8 months')}
+												option(data-month="9", value=9) #{__('last 9 months')}
+												option(data-month="10", value=10) #{__('last 10 months')}
+												option(data-month="11", value=11) #{__('last 11 months')}
+												option(data-month="12", value=12) #{__('last 12 months')}
+									.line
+									.box-body.no-padding
+										.table-responsive
+											table.table.table-striped.margin-bottom-0.font-sm
+												thead
+													tr
+														th.text-center(style='width: 10px') #
+														th #{__('Province')}
+														th.text-right #{__('Grand Total')}
+												tbody
+									.overlay
+										
+
+						#dv-customer_history.row.hidden
+							.col-sm-12
+								.box.margin-bottom-0
+									.box-body.padding-0
+										.table-responsive
+											table#tb-customer_history.table.table-striped.margin-bottom-0.font-sm
+												thead
+													tr
+														th.text-center(style='width: 10px') #
+														th #{__('Id')}
+														th #{__('Name')}
+														th #{__('Shop Name')}
+														th #{__('Mobile Phone Number')}
+														th #{__('District')}
+														th.text-center #{__('Price')}
+														th.th-bill.text-center #{__('Bill')}
+														th.th-total.text-right #{__('Grand Total')}
+												tbody
+
+					#d.tab-pane(role='tabpanel')
+						.row.padding-10
+							form.col-sm-12
+								.form-group.col-sm-3.text-danger
+									label(for='input') #{__('Month')}	
+									select#selectMonth.form-control.col-sm-3
+							.box.box-solid
+								.box-body.col-sm-12
+									.col-sm-12
+										#div-chartDailySale(style="width: 100%; height: 300px;")
+									.col-sm-12
+										#div-chartDailySaleDetail(style="width: 75%; height: 350px;")
+									.col-sm-12
+										#div-chartDailySaleHistory(style="width: 100%; height: 300px;")
+									.col-sm-12
+										#div-chartDailyStackPercent(style="width: 100%; height: 300px;")
+									.col-sm-12
+										#div-chartDailyQty(style="width: 100%; height: 300px;")
+
+	p#scroll-top
+		a(href='#')
+			i.fa.fa-chevron-up
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')
+	script(src='https://www.gstatic.com/charts/loader.js')
+	script(src='https://www.google.com/jsapi')

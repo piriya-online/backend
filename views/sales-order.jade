@@ -1,0 +1,295 @@
+extends layout
+
+block content
+	input#msg-paid(type="hidden", value="#{__('paid')}")
+	input#msg-unpaid(type="hidden", value="#{__('unpaid')}")
+	input#msg-pack(type="hidden", value="#{__('pack')}")
+	input#msg-unpack(type="hidden", value="#{__('unpack')}")
+	input#msg-shipped(type="hidden", value="#{__('shipped')}")
+	input#msg-awaiting_shipment(type="hidden", value="#{__('awaiting shipment')}")
+	input#msg-total(type="hidden", value="#{__('total')}")
+	input#msg-loadingData(type="hidden", value="#{__('loadingData')}")
+
+	.row
+		.col-md-3
+			.form-group.dv-search.margin-left-3
+				.input-group
+					input#txt-search.form-control(type="search", placeholder="ค้นหาเลขที่คำสั่งซื้อจาก SKU")
+					span#btn-search.input-group-addon
+						i.fa.fa-search
+
+			#dv-loading_search.callout.callout-info.text-center.hidden
+				img.loading.top-2(src="/images/icons/loading.gif", alt="loading")
+				span.loading.text-muted &nbsp;#{__('loadingData')}
+
+			#dv-no_data_search.callout.callout-danger.text-center.hidden
+				span.loading.text-muted &nbsp;#{__('noData')}
+
+			.table-responsive
+				table#tb-result_search.table.table-striped.table-condensed.table-hover.hidden
+					thead
+						tr.font-sm
+							th.text-center(width="92") #{__('order number')}
+							th.text-right(width="65") #{__('qty')}
+					tbody
+
+			#dv-category.box.box-primary
+				.box-header
+					h3.pull-left.box-title #{__('grand total')}
+					h3.pull-right.box-title.text-red
+						span.sp-Income 0
+						small  &#3647;
+				.line
+				.box-body
+					ul#ul-month.nav.nav-pills.nav-stacked
+						li.active(data-month="0")
+							a(href="javascript:void(0)") #{__('current month')}
+						li(data-month="1")
+							a(href="javascript:void(0)") #{__('last 1 month')}
+						li(data-month="2")
+							a(href="javascript:void(0)") #{__('last 2 months')}
+						li(data-month="3")
+							a(href="javascript:void(0)") #{__('last 3 months')}
+
+			#dv-type.box.box-primary
+				.box-header
+					h3.pull-left.box-title ประเภทข้อมูล
+						small#typeCount.badge.pull-right.margin-left-5.bg-red(style="display: block") 0
+				.line
+				.box-body
+					table(width="100%")
+						tr
+							td(width="50%")
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#notPrint(type="radio", name="print")
+											span.margin-left-5 ยังไม่พิมพ์
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#isPrint(type="radio", name="print")
+											span.margin-left-5 พิมพ์แล้ว
+						tr
+							td(width="50%")
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#notCancel(type="radio", name="cancel", checked)
+											span.margin-left-5 ยังไม่ยกเลิก
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#isCancel(type="radio", name="cancel")
+											span.margin-left-5 ยกเลิกแล้ว
+						tr
+							td(width="50%")
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#isPaid(type="radio", name="paid")
+											span.margin-left-5 ชำระเงินแล้ว
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#notPaid(type="radio", name="paid", checked)
+											span.margin-left-5 ยังไม่ชำระเงิน
+						tr
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#isPack(type="radio", name="pack")
+											span.margin-left-5 จัดสินค้าแล้ว
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#notPack(type="radio", name="pack", checked)
+											span.margin-left-5 ยังไม่จัดสินค้า
+						tr
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#isShip(type="radio", name="ship")
+											span.margin-left-5 ส่งสินค้าแล้ว
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#notShip(type="radio", name="ship", checked)
+											span.margin-left-5 ยังไม่ส่งสินค้า
+						tr
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#isEvent(type="radio", name="event")
+											span.margin-left-5 อีเวนท์
+							td
+								div.form-group
+									div.radio
+										label.padding-left-0
+											input#isAll(type="radio", name="event", checked)
+											span.margin-left-5 ทั้งหมด
+
+		.col-md-9
+			.panel-group#panel-istpack.hidden(role='tablist', aria-multiselectable='true')
+				.panel.panel-danger
+					#headingOne.panel-heading(role='tab')
+						h4.panel-title
+							a#a-istpack(data-toggle='collapse', data-parent='#accordion', href='#istpack', aria-expanded='false')
+								strong รายการสั่งซื้อที่ยังไม่ได้แพ็คทั้งหมด
+					#istpack.panel-collapse.collapse(role='tabpanel')
+						.panel-body
+							.table-responsive
+								table#tb-result_istpack.table.table-striped.table-condensed.table-hover.hidden
+									thead
+										tr.font-sm
+											th.text-center(width="92") #{__('order number')}
+											th.text-center(width="110") #{__('orderDate')}
+											th(colspan="2", width="105") #{__('status')}
+											th #{__('firstname')}
+											th #{__('shop name')}
+											th.text-right(width="65") #{__('grand total')}
+									tbody
+			
+			#dv-loading.callout.callout-info.text-center
+				img.loading.top-2(src="/images/icons/loading.gif", alt="loading")
+				span.loading.text-muted &nbsp;#{__('loadingData')}
+
+			#dv-no_data.callout.callout-danger.text-center.hidden
+				span.loading.text-muted &nbsp;#{__('noData')}
+
+			.table-responsive.wait.hidden
+				table#tb-result.table.table-striped.table-condensed.table-hover.wait.hidden
+					thead
+						tr.font-sm
+							th.text-center(width="92") #{__('order number')}
+							th.text-center(width="110") #{__('orderDate')}
+							th(colspan="2", width="105") #{__('status')}
+							th #{__('firstname')}
+							th #{__('shop name')}
+							th.text-right(width="65") #{__('grand total')}
+					tbody
+
+
+
+	#dv-input_credit.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title บันทึกข้อความ
+				.modal-body
+					form
+						div.form-group
+							label วันครบกำหนดชำระ
+							div.input-group.date
+								div.input-group-addon
+									i.fa.fa-calendar
+								input#datepicker.form-control.pull-right(type="text")
+
+						input#txt-comment.form-control.uppercase(type='text', value='', placeholder="ข้อความ")
+				.modal-footer
+					.input-group
+						span.input-group-btn
+							button.btn-save.btn.btn-warning(type='button')
+								i.fa.fa-check-circle
+								|   #{__('save data')}
+
+
+
+	#dv-input_shipping.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title #{__('shipping method')}
+				.modal-body
+					form
+						.form-group
+							select#shipping_method.form-control
+								option(value="KE", selected) #{__('Shipping - Kerry Express')}
+								option(value="SCG", selected) SCG Express
+								option(value="CC") #{__('Shipping - Collect Call')}
+								option(value="SS") #{__('Shipping - Self Service')}
+								option(value="EMS") #{__('Shipping - EMS')}
+								option(value="RGT") #{__('Shipping - Registered')}
+						.input-group
+							input#txt-tracking.form-control.uppercase(type='text', value='', placeholder="#{__('Shipping - Tracking Number')}")
+							span.input-group-btn
+								button#btn-tracking-search.btn.btn-default(type="button")
+									i.fa.fa-search
+						input#txt-orderNo(type='hidden')
+				.modal-footer
+					.input-group
+						span.input-group-btn
+							button.btn-save.btn.btn-warning(type='button')
+								i.fa.fa-check-circle
+								|   #{__('save data')}
+
+
+	#dv-premium.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title ยืนยันข้อมูล
+				.modal-body
+					span รายการสินค้านี้เป็นสินค้าพรีเมี่ยมใช่หรือไม่
+				.modal-footer
+					button#btn-cancel_premium.btn.btn-default(type="button", data-dismiss="modal") ยกเลิก
+					button#btn-premium.btn.btn-primary(type="button") ใช่
+	
+	#dv-print.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm   
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title ต้องการพิมพ์ใบสั่งซื้อนี้
+				.modal-body.text-center
+					b#txt-orderPrint
+					br
+					button#btn-print_view.btn.btn-default(type="button") ดูรายการ
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") ยกเลิก
+					button#btn-print.btn.btn-primary(type="button") ใช่
+
+	#dv-event.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title รายการสั่งซื้อ Event
+				.modal-body.text-center
+					b#txt-orderEvent
+					br
+					p#txt-nameEvent
+					.row#date-event.hidden
+						.form-group.col-sm-6.text-danger
+							label(for='input') #{__('Date From')}	
+							input#startDate.datepicker.form-control(data-date-format="dd/mm/yyyy")
+						.form-group.col-sm-6.text-danger
+							label(for='input') #{__('Date To')}	
+							input#endDate.datepicker.form-control(data-date-format="dd/mm/yyyy")
+					.row#date-evented.hidden
+						p#txt-eventDate
+						p#txt-eventAddBy
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") ยกเลิก
+					button#btn-submit.btn.btn-primary(type="button") ตกลง

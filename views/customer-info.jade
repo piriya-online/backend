@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	.row
+		.col-md-6
+			.box.box-primary
+				.box-header.clearfix
+					h3.box-title #{__('profile')}
+				.box-body.clearfix
+					form.form-horizontal
+						div.form-group
+							label.col-sm-2.control-label(for="inputEmail3") Email
+							div.col-sm-10
+								input.form-control(type="email", placeholder="Email")

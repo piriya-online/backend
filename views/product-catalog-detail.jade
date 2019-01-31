@@ -1,0 +1,50 @@
+extends layout
+
+block content
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid#dv-head
+			.box-body
+				.row.padding-10
+					#dv-loading.callout.callout-info.text-center.dv-alert.hidden
+						img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+						span.loading.text-muted &nbsp;#{__('loadingData')}
+					#dv-no_data.callout.callout-danger.text-center.dv-alert.hidden
+						span.loading.text-muted &nbsp;#{__('noData')}
+					#dv-done.callout.callout-info.text-center.dv-alert.hidden
+						span.loading.text-muted &nbsp;ข้อมูลถูกบันทึกแล้ว
+						
+		.box.box-solid.wait.hidden
+			.box-body
+				.row.padding-10
+					form
+						.form-group.col-sm-3
+							label(for='input') ชื่อลูกค้า
+							input#txt-customer.form-control.txt-input.txt-require(type='text', placeholder='ชื่อลูกค้า', value='')
+						.form-group.col-sm-3.text-center			
+							button#btn-export.btn.btn-primary.margin-top-25 บันทึกเป็นไฟล์ Excel
+	
+		.box.box-solid.wait.hidden
+			.box-body
+				.row.padding-10			
+					.wait.hidden
+						table#tb-result.table2excel.table.table-striped.table-bordered.wait.hidden
+							thead
+								tr
+									td(colspan="6").text-center(width="100")
+										H1 Price List Remaxthailand
+								tr#trCustomerName.hidden
+									td(colspan="6").text-center(width="100")
+										H3#customerName
+								tr
+									th.text-center(width="10") ลำดับ
+									th.text-center(width="20") รหัสสินค้า (SKU)
+									th.text-center(width="90") ชื่อสินค้า
+									th.text-center(width="50") รูปสินค้า
+									th.text-center(width="20") ราคาทุน
+									th.text-center(width="20") ราคาSRP
+				
+							tbody
+	
+	p#scroll-top
+		a(href='#')
+			i.fa.fa-chevron-up

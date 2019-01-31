@@ -1,0 +1,41 @@
+extends layout
+
+block content
+	.row
+		.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			.nav-tabs-custom
+				ul.nav.nav-tabs(role='tablist')
+					li.active(role='presentation')
+						a(href='#a', aria-controls='a', role='tab', data-toggle='tab') รายการอีเว้นท์
+					li(role='presentation')
+						a(href='#b', aria-controls='b', role='tab', data-toggle='tab') บิลอีเว้นท์ที่จบแล้ว
+				.tab-content
+					#a.tab-pane.active.margin-top-20(role='tabpanel')
+						.text-center
+							i.fa.fa-refresh.fa-spin.loadRoles								
+						#accordion.panel-group(role="tablist" aria-multiselectable="true")
+								
+					#b.tab-pane.margin-top-20(role='tabpanel')
+						| บิลอีเว้นท์ที่จบแล้ว 
+
+	#dv-event.modal.fade(tabindex='-1', role='dialog')
+		.modal-dialog.modal-sm
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal')
+						span(aria-hidden='true') &times;
+						span.sr-only #{__('close')}
+					h4.modal-title รับเข้าบิล Event
+				.modal-body.text-center
+					b#txt-orderEvent
+					br
+					p#txt-nameEvent
+					.row#load-event.text-center.hidden
+						i.fa.fa-refresh.fa-spin.fa-lg
+					.row#date-evented.hidden
+						p#txt-eventDate
+						p#txt-eventAddBy
+				.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") ยกเลิก
+					button#btn-submit.btn.btn-primary(type="button") ยืนยัน
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')

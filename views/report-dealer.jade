@@ -1,0 +1,95 @@
+extends layout
+
+block content
+	.row
+		.col-md-9
+			.box.box-primary
+				.box-header
+					h3.box-title #{__('order information')} : #{__('monthly')}
+					i#exportExl.fa.fa-file-excel-o
+				.box-body.table-responsive
+					table#tb-order.table2excel.table.table-condensed.table-hover(width="100%")
+						thead
+							tr.font-sm 
+								th.text-center.hidden(rowspan="2") #{__('memberId')}
+								th.text-center(rowspan="2") #{__('firstname')}
+								th.text-center.hidden(rowspan="2") #{__('shop name')}
+								th.text-center.hidden(rowspan="2") #{__('supervisor')} 
+								th.text-center.hidden(rowspan="2") #{__('status')} 
+								th.text-center.hidden(rowspan="2") #{__('region')} 
+								th.text-center.hidden(rowspan="2") #{__('province')} 
+								th.text-center.hidden(rowspan="2") #{__('mobilePhoneNumber')}
+								th.text-center(rowspan="2", width="30") #{__('price')}
+								th.text-center(colspan="2")
+									| #{__('last 3 months')}
+								th.text-center(colspan="2")
+									| #{__('last 2 months')}
+								th.text-center(colspan="2")
+									| #{__('last 1 month')}
+								th.text-center(colspan="2")
+									| #{__('current month')}
+							tr.font-sm
+								th.text-right(width="75")
+									| #{__('price')}
+								th.text-right(width="30")
+									| #{__('bill')}
+								th.text-right(width="75")
+									| #{__('price')}
+								th.text-right(width="30")
+									| #{__('bill')}
+								th.text-right(width="75")
+									| #{__('price')}
+								th.text-right(width="30")
+									| #{__('bill')}
+								th.text-right(width="75")
+									| #{__('price')}
+								th.text-right(width="30")
+									| #{__('bill')}
+						tbody
+
+		.col-md-3
+			.box.box-primary
+				.box-header
+					h3.box-title #{__('register information')}
+				.box-body.table-responsive
+					table.table.table-condensed(width="100%")
+						tbody
+							tr.font-sm
+								th
+								th.text-right
+									| #{__('all')}
+								th.text-right
+									| #{__('current month')}
+							tr
+								td.text-right
+									| #{__('register')}
+								td.text-right
+									b.sp-registerAll
+								td.text-right
+									span.sp-registerThisMonth
+							tr
+								td(colspan="3", style="border-top:none")								
+									.col-md-12.text-center
+										input#msg-bangkok(type='hidden', value="#{__('bangkok')}")
+										input#msg-unknown(type='hidden', value="#{__('unknown')}")
+										input#msg-upcountry(type='hidden', value="#{__('upcountry')}")
+										input#msg-register(type='hidden', value="#{__('register')}")
+										#province-chart.chart(style="height: 200px; position: relative;")
+							tr
+								td.text-right
+									| #{__('active dealer')}
+								td.text-right
+									span.sp-activeAll
+								td.text-right
+									span.sp-activeThisMonth
+					.col-md-12.text-center.hidden.chart-responsive
+						input#chart-register.knob(type="text", value="80", data-width="100", data-height="100", data-fgColor="#3c8dbc", data-readonly="true")
+						.knob-label  #{__('current month')} / #{__('all')} = 
+							span.sp-register_percent
+							|  %
+
+			.box.box-primary
+				.box-header
+					h3.box-title #{__('register information')} : #{__('weekly')}
+				.box-body.chart-responsive
+					#line-chart.chart(style="height: 200px;")

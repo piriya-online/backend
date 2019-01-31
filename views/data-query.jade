@@ -1,0 +1,62 @@
+extends layout
+
+block content
+	.row
+		.col-xs-12.col-sm-12.col-md-12.col-lg-12
+			#accordion.panel-group(role='tablist', aria-multiselectable='true')
+				.panel.panel-default
+					#headingOne.panel-heading(role='tab')
+						h4.panel-title
+							a(data-toggle='collapse', data-parent='#accordion', href='#topseller', aria-expanded='false')
+								strong Top Seller 
+								| &#58; อันดับยอดขายตามยี่ห้อ และละหมวดหมู่
+					#topseller.panel-collapse.collapse(role='tabpanel')
+						.panel-body
+							.panel.panel-default
+								.panel-body
+									form.form-horizontal
+										.form-group
+											label.col-sm-2.control-label(for='input') ปี
+											.col-sm-10
+												input.form-control.year(type='text', placeholder=' ปี')
+												p.help-block
+													| (format '2019')
+										.form-group
+											label.col-sm-2.control-label(for='input') เดือน
+											.col-sm-10
+												input.form-control.month(type='text', placeholder=' เดือน')
+												p.help-block
+													| (format '01')
+										.form-group
+											label.col-sm-2.control-label(for='input') จำนวน Top Seller
+											.col-sm-10
+												input.form-control.top(type='text', placeholder=' จำนวน Top Seller')
+												p.help-block
+													| (format '10')
+										.form-group.margin-bottom-0
+											.col-sm-offset-2.col-sm-10
+												.btn.btn-sm.btn-primary.btn-submit(data-loading-text='Loading...', autocomplete='off') Submit
+							.result.hidden.alert.margin-top-10.margin-bottom-0.font-pre(role='alert')
+				.panel.panel-default
+					#headingOne.panel-heading(role='tab')
+						h4.panel-title
+							a(data-toggle='collapse', data-parent='#accordion', href='#productqtrinorder', aria-expanded='false')
+								strong Products quantity in Order
+								| &#58; จำนวนสินค้าในใบจองสินค้า
+					#productqtrinorder.panel-collapse.collapse(role='tabpanel')
+						.panel-body
+							.panel.panel-default
+								.panel-body
+									form.form-horizontal
+										.form-group
+											label.col-sm-2.control-label(for='input') เลขที่คำสั่งซื้อ
+											.col-sm-10
+												input.form-control.orderNo(type='text', placeholder=' เลขที่คำสั่งซื้อ')
+												p.help-block
+													| (format '1901B99999')
+
+										.form-group.margin-bottom-0
+											.col-sm-offset-2.col-sm-10
+												.btn.btn-sm.btn-primary.btn-submit(data-loading-text='Loading...', autocomplete='off') Submit
+							.result.hidden.alert.margin-top-10.margin-bottom-0.font-pre(role='alert')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')

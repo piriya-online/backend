@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	.row
+		.col-md-12
+			.box.box-primary
+				.box-body.clearfix
+					.col-md-12
+						label.checkbox-inline
+							input#isPaid(type="checkbox")
+							|  #{__('paid')}
+						label.checkbox-inline
+							input#isUnpaid(type="checkbox")
+							|  #{__('unpaid')}
+		.col-md-12.table-responsive
+			table#tb-result.table.table-condensed.table-hover.font-sm(width="100%")
+				thead
+					th.text-center(width="25")
+						input(type="checkbox")
+					th #{__('name')}
+					th(width="300", nowrap="nowrap") #{__('shop name')}
+					th.text-center(width="50", nowrap="nowrap") #{__('order count')}
+					th.text-right(width="90", nowrap="nowrap") #{__('paid')}
+					th.text-right(width="100", nowrap="nowrap") #{__('unpaid')}
+					th(width="20", nowrap="nowrap") #{__('credit')}
+					th.text-center(width="120", nowrap="nowrap") #{__('registerDate')}
+				tbody
+				tfoot

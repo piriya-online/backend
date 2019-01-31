@@ -1,0 +1,65 @@
+extends layout
+
+block content
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .box.box-solid
+            .box-body
+                .row.padding-10
+                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        #dv-form
+                            form
+                                .form-group.col-sm-6.text-danger
+                                    input#txt-search.form-control.txt-input.txt-require(type='text', placeholder='Search by ID, Username, Firstname, Mobile or Email', value='')
+                                .form-group.col-sm-3			
+                                    button#btn-search.btn.btn-default
+                                        i.fa.fa-search
+                    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        #dv-loading_data.text-center.hidden
+                            img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+                            span.loading.text-muted &nbsp;#{__('loadingData')}					
+                        #dv-no_data.text-center.hidden
+                            span.loading.text-muted &nbsp;#{__('noData')}
+                        .wait.hidden.table-responsive
+                            table#tb-result.table.table-bordered.table-condensed.table-hover.wait.hidden
+                                thead
+                                    tr
+                                        th.text-center(width="100") #{__('Member ID')}
+                                        th.text-center(width="200") #{__('Name')}
+                                        th.text-center(width="200") #{__('Username')}
+                                        th.text-center(width="200") #{__('Member Type')}
+                                        th.text-center(width="200") #{__('Sell Price')}
+                                        th.text-center(width="200") #{__('Email')}
+                                        th.text-center(width="200") #{__('Mobile')}
+                                        th.text-center(width="200") #{__('Register Date')}
+                                        th.text-center(width="200") #{__('Order Qty')}
+                                        th.text-center(width="200") #{__('Order Total')}
+                                tbody
+    #dv-adjust.hidden
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            .box.box-solid
+                .box-body
+                    .row.padding-10
+                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                            b Member ID:  
+                            u#txt-memberID ???
+                            p
+                            b Name: 
+                            u#txt-name ???
+                            p
+                            b Member Type: 
+                            u#txt-memberType ???
+                            form.margin-top-20
+                                .form-group.col-sm-3.text-danger
+                                    label #{__('Sell Price')}	
+                                    input#txt-sellPrice.form-control.txt-input.txt-require(type='text', placeholder='Sell Price', value='3')
+                                .form-group.col-sm-3
+                                    button#btn-submit.btn.btn-primary.margin-top-25
+                                        i.fa.fa-check
+                        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                            #dv-done.alert.alert-success.margin-bottom-30.text-center.hidden(role='alert')
+                                i.fa.fa-check-circle-o.fa-lg
+                                | ได้ทำการปรับช่องราคาแล้ว
+
+
+
+    script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')

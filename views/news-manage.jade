@@ -1,0 +1,105 @@
+extends layout
+
+block content
+
+	.col-xs-12.col-sm-12.col-md-12.col-lg-12
+		.box.box-solid
+			.box-body
+				.row.padding-10
+					form.col-sm-12
+						.form-group.col-sm-3.text-danger
+							label(for='input') กรุณาเลือกประเภทการแสดงข้อมูล
+							select.select-message_type.form-control
+								option(value='all') ทั้งหมด
+								option(value='type') ตามประเภทลูกค้า
+								option(value='member') เฉพาะคน
+						.form-group.col-sm-9.form-member_type.hidden
+							label(for='input') &nbsp;
+							select.select-member_type.form-control
+								option(value='member') สมาชิกทั่วไป
+								option(value='dealer') ดีลเลอร์
+								option(value='shop') ช็อป
+						.form-group.col-sm-9.form-member_id.hidden
+							label(for='input') &nbsp;
+							.input-group
+								input#add-member_id.form-control(type='text', aria-describedby='#add-member_id', placeholder='Add By Member ID', value='')
+								span.input-group-btn
+									button#btn-add-member_id.btn.btn-primary(type='button')
+										i.fa.fa-plus
+
+						.form-group.col-sm-9.form-member_idsearch.hidden
+							label(for='input') &nbsp;
+							.input-group
+								input#select-member_idsearch.form-control(type='text', aria-describedby='#select-member_id', placeholder='Search By ID, Username, Firstname, Mobile or Email', value='')
+								span.input-group-btn
+									button#btn-select-member_idsearch.btn.btn-primary(type='button')
+										i.fa.fa-search
+						.form-group.col-sm-12.form-member_result.hidden
+							#dv-loading_data_member.text-center.hidden
+								img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
+								span.loading.text-muted &nbsp;#{__('loadingData')}					
+							#dv-no_data_member.text-center.hidden
+								span.loading.text-muted &nbsp;#{__('noData')}
+							.table-responsive.wait_member.hidden
+								table#tb-result_member.table.table-bordered.table-condensed.table-hover.wait_member.hidden
+									thead
+										tr 
+											th.text-center(width="100") #{__('Member ID')}
+											th.text-center(width="200") #{__('Name')}
+											th.text-center(width="200") #{__('Shop Name')}
+											th.text-center(width="100") #{__('Username')}
+											th.text-center(width="200") #{__('Member Type')}
+											th.text-center(width="200") #{__('Sell Price')}
+											th.text-center(width="200") #{__('Email')}
+											th.text-center(width="200") #{__('Mobile')}
+											th.text-center(width="200") #{__('Register Date')}
+											th.text-center(width="200") #{__('Order Qty')}
+											th.text-center(width="200") #{__('Order Total')}
+									tbody
+						.form-group.col-sm-12
+							label#lbl-message(for='input') ข้อความ
+							textarea#txt-message.form-control(style="resize:none" rows="4")
+						.form-group.col-sm-12.text-right
+							button#btn-submit.btn.btn-primary(type="button") บันทึก
+
+					form.col-sm-12
+						.form-group.col-sm-3.form-search_message
+							label(for='input') ค้นหาด้วยรหัสสมาชิก
+							.input-group
+								input#search-memberid.form-control(type='text', aria-describedby='#search-memberid', placeholder='Search By Member ID', value='')
+								span.input-group-btn
+									button#btn-search-memberid.btn.btn-primary(type='button')
+										i.fa.fa-search
+						.form-group.col-sm-3.form-search_message
+							label(for='input') ค้นหาด้วยข้อความ
+							.input-group
+								input#search-message.form-control(type='text', aria-describedby='#search-message', placeholder='Search By Message', value='')
+								span.input-group-btn
+									button#btn-search-message.btn.btn-primary(type='button')
+										i.fa.fa-search
+						.form-group.col-sm-3.form-search_message
+							label(for='button') &nbsp;
+							button#btn-refresh.btn.btn-primary.margin-top-25(type='button')
+								i.fa.fa-refresh
+
+				#dv-loading_data.callout.callout-info.text-center.hidden
+					img.loading.top-2(src="/images/icons/loading.gif", alt="loading")
+					span.loading.text-muted &nbsp;#{__('loadingData')}
+
+				#dv-no_data.callout.callout-danger.text-center.hidden
+					span.loading.text-muted &nbsp;#{__('noData')}
+
+				.table-responsive.wait.hidden
+					table#tb-result.table.table-striped.table-condensed.table-hover.wait.hidden
+						thead
+							tr.font-sm
+								th.text-center(width="10") วันที่
+								th.text-center(width="10") ผู้รับข้อความ
+								th.text-center(width="200") ข้อความ
+								th.text-center(width="10") สถานะ
+								th.text-center(width="10") เพิ่มโดย
+								th.text-center(width="10") ปรับปรุงโดย
+								th.text-center(width="10") ปรับปรุงล่าสุด
+						tbody
+	
+	script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js')
