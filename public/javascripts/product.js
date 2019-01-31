@@ -336,6 +336,10 @@ function loadCategory(){
 					loadedCategory = true;
 					if (loadedCategory && loadedBrand) loadProduct();
 				}
+				else {
+					loadedCategory = true;
+					if (loadedCategory && loadedBrand) loadProduct();
+				}
 			}
 	}, 'json').fail( function(xhr, textStatus, errorThrown) { console.log(xhr.statusText); });
 }
@@ -353,6 +357,10 @@ function loadBrand(){
 						$('#tab').append('<li class="brand-' + result.id + ' hidden" data-id="' + result.id + '"><a href="javascript:void(0)">' + result.name + '</a></li>')
 					}
 					$('.hidden').removeClass('hidden').hide();
+					loadedBrand = true;
+					if (loadedCategory && loadedBrand) loadProduct();
+				}
+				else {
 					loadedBrand = true;
 					if (loadedCategory && loadedBrand) loadProduct();
 				}
@@ -379,8 +387,8 @@ function loadProduct(){
 		Cookies.set('token', '');
 	}
 
-	var token = Cookies.get('token');
-	/*var socket = io('https://io.remaxthailand.co.th');
+	/*var token = Cookies.get('token');
+	var socket = io('https://io.remaxthailand.co.th');
 
 	if (token == '') {
 		socket.emit('access', { token: token } );

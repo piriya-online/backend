@@ -276,7 +276,7 @@ function loadProvince(){
 		Cookies.set('token', '');
 	}
 	token = Cookies.get('token');
-	socket = io('https://io.remaxthailand.co.th');
+	/*socket = io('https://io.remaxthailand.co.th');
 
 	socket.on('access', function(data){
 		token = data.token;
@@ -285,7 +285,7 @@ function loadProvince(){
 	
 	if (token == '') {
 		socket.emit('access', { token: token } );
-	}
+	}*/
 	/*else {
 		socket.emit('api', {
 			token: token,
