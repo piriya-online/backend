@@ -120,8 +120,8 @@ exports.process = function(req, res, next, action, data){
 					var ref = (typeof req.headers.referer != 'undefined') ? req.headers.referer : '';
 					res.cookie('memberInfo', util.encrypt(JSON.stringify(obj.result[0]).toString(), obj.authKey.toString()), {secure: true, expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
 					res.cookie('screenInfo', util.encrypt(JSON.stringify(screen).toString(), obj.authKey.toString()), {secure: true, expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
-					//res.redirect( (req.cookies.url == '/logout' || req.cookies.url == '/initial') ? '/' : ((ref.indexOf('/teamwork') != -1) ? '/member/profile' : req.cookies.url) ); //res.redirect(req.cookies.url);
-					res.send('req.cookies.url : '+req.cookies.url );
+					res.redirect( (req.cookies.url == '/logout' || req.cookies.url == '/initial') ? '/' : ((ref.indexOf('/teamwork') != -1) ? '/member/profile' : req.cookies.url) ); //res.redirect(req.cookies.url);
+					//res.send('req.cookies.url : '+req.cookies.url );
 				}
 				else {
 					res.redirect('/logout');
