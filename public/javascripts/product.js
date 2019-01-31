@@ -379,6 +379,10 @@ function loadProduct(){
 					product = data.result;
 					renderProduct();
 				}
+				else {
+					$('#dv-no_data').show();
+					$('#dv-loading').hide();
+				}
 			}
 	}, 'json').fail( function(xhr, textStatus, errorThrown) { console.log(xhr.statusText); });
 

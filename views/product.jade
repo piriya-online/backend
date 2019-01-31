@@ -23,6 +23,11 @@ block content
 		img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
 		span.loading.text-muted &nbsp;#{__('loadingData')}
 
+	#dv-no_data.callout.callout-danger.text-center.hidden
+		b.text-red
+			i.fa.fa-warning
+			|  #{__('cart is empty')}
+
 	.row
 		.col-md-3
 			#dv-category.box.box-primary.wait.hidden
