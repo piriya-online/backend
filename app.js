@@ -136,116 +136,116 @@ app.get('/logout', function(req, res, next) {
 
 
 app.get('/', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/dashboard.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/dashboard.js', function (exists) {
 		routes.index(req, res, 'dashboard', exists ? '/javascripts/dashboard.js' : null);
 	});
 });
 
 app.get('/teamwork', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/teamwork.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/teamwork.js', function (exists) {
 		routes.index(req, res, 'teamwork', exists ? '/javascripts/teamwork.js' : null);
 	});
 });
 
 app.get('/product/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/product-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/product-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'product-'+req.params.action, exists ? '/javascripts/product-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/product', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/product.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/product.js', function (exists) {
 		routes.index(req, res, 'product', exists ? '/javascripts/product.js' : null);
 	});
 });
 
 app.get('/cart', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/cart.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/cart.js', function (exists) {
 		routes.index(req, res, 'cart', exists ? '/javascripts/cart.js' : null);
 	});
 });
 
 app.get('/commission', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/commission.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/commission.js', function (exists) {
 		routes.index(req, res, 'commission', exists ? '/javascripts/commission.js' : null);
 	});
 });
 
 app.get('/member/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/member-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/member-'+req.params.action+'.js', function (exists) {
 		//console.log('cccc'+exists+'ddd');
 		routes.index(req, res, 'member-'+req.params.action, exists ? '/javascripts/member-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/receivable/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/receivable-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/receivable-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'receivable-'+req.params.action, exists ? '/javascripts/receivable-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/admin/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/admin-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/admin-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'admin-'+req.params.action, exists ? '/javascripts/admin-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/report/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/report-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/report-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'report-'+req.params.action, exists ? '/javascripts/report-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/customer/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/customer-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/customer-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'customer-'+req.params.action, exists ? '/javascripts/customer-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/customer/info/:id/:member', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/customer-info.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/customer-info.js', function (exists) {
 		routes.index(req, res, 'customer-info', exists ? '/javascripts/customer-info.js' : null, req.params.id, req.params.member);
 	});
 });
 
 app.get('/sales/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/sales-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/sales-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'sales-'+req.params.action, exists ? '/javascripts/sales-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/shop/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/shop-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/shop-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'shop-'+req.params.action, exists ? '/javascripts/shop-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/transport/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/transport-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/transport-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'transport-'+req.params.action, exists ? '/javascripts/transport-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/transport', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/transport.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/transport.js', function (exists) {
 		routes.index(req, res, 'transport', exists ? '/javascripts/transport.js' : null);
 	});
 });
 
 app.get('/news', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/news.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/news.js', function (exists) {
 		routes.index(req, res, 'news', exists ? '/javascripts/news.js' : null);
 	});
 });
 
 app.get('/news/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/news-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/news-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'news-'+req.params.action, exists ? '/javascripts/news-'+req.params.action+'.js' : null);
 	});
 });
 
 app.get('/data/:action', function(req, res) {
-	fs.exists('/data/www/production/remaxthailand/24fin-backend/public/javascripts/data-'+req.params.action+'.js', function (exists) {
+	fs.exists(__dirname + '/public/javascripts/data-'+req.params.action+'.js', function (exists) {
 		routes.index(req, res, 'data-'+req.params.action, exists ? '/javascripts/data-'+req.params.action+'.js' : null);
 	});
 });
