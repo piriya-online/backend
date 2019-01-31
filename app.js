@@ -42,13 +42,13 @@ if ('development' == app.get('env')) {
 app.get('*', function(req, res, next) {
 
 	if (typeof req.cookies.language == 'undefined') {
-		res.cookie('language', decodeURIComponent('th'), {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
+		res.cookie('language', 'th', {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
 		req.setLocale('th');
 	} else {
 		req.setLocale(req.cookies.language);
 	}
 	//req.setLocale('th');
-	res.cookie('url', decodeURIComponent(req.url), {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
+	res.cookie('url', req.url, {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
 
 	if ( req.url.indexOf('/language') == -1 &&
 		req.url.indexOf('/auth') == -1 &&
@@ -81,20 +81,20 @@ app.get('*', function(req, res, next) {
 
 
 app.get('/language/:lang', function(req, res) {
-	res.cookie('language', decodeURIComponent(req.params.langdecodeURIComponent(, {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
-	res.cookie('url', decodeURIComponent('/'), {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
+	res.cookie('language', req.params.lang, {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
+	res.cookie('url', '/', {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
 	req.setLocale(req.params.lang);
 	res.redirect(req.cookies.url);
 });
 
 app.get('/auth/:authKey/:lang/:remember', function(req, res, next) {
 	if (req.params.remember == '1')
-		res.cookie('authKey', decodeURIComponent(req.params.authKey), {signed: true, secure: true, expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
+		res.cookie('authKey', req.params.authKey, {signed: true, secure: true, expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
 	else
-		res.cookie('authKey', decodeURIComponent(req.params.authKey), {signed: true, secure: true});
+		res.cookie('authKey', req.params.authKey, {signed: true, secure: true});
 
-	res.cookie('language', decodeURIComponent(req.params.lang), {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
-	res.cookie('url', decodeURIComponent('/'), {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
+	res.cookie('language', req.params.lang, {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
+	res.cookie('url', '/', {expires: new Date(Date.now() + config.cookie.expire ), maxAge: config.cookie.expire});
 
 	/*var postString = querystring.stringify({
 		authKey : req.params.authKey
