@@ -14,7 +14,7 @@ $(function() {
 	$(document).on('change', '#cbb-isVisible', function(){
 		$('tbody tr .i-visible').each(function(){
 			if($('#cbb-isVisible').val() == 'all'){
-				$(this).show();
+				$(this).parents('tr').show();
 			}
 			else if($('#cbb-isVisible').val() == '1') {
 				if ($(this).hasClass('text-success')){
