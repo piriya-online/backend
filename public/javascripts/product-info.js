@@ -11,29 +11,6 @@ $(function() {
 	$(document).on('change', '#cbb-brand', function(){
 		loadData( $('#cbb-brand').val(), Cookies.get('category') );
 	});
-	$(document).on('change', '#cbb-isVisible', function(){
-		$('tbody tr .i-visible').each(function(){
-			if($('#cbb-isVisible').val() == 'all'){
-				$(this).parents('tr').show();
-			}
-			else if($('#cbb-isVisible').val() == '1') {
-				if ($(this).hasClass('text-success')){
-					$(this).parents('tr').show();
-				}
-				else {
-					$(this).parents('tr').hide();
-				}
-			}
-			else {
-				if ($(this).hasClass('text-success')){
-					$(this).parents('tr').hide();
-				}
-				else {
-					$(this).parents('tr').show();
-				}
-			}
-		})
-	});
 
 	$(document).on('click', '#tb-result tbody b.current', function(){
 		if(!$('#th-cost').is(":hidden")){
@@ -169,8 +146,8 @@ function loadCategory(){
 function loadBrand(){
 	$('#dv-loading').show();
 	$('#dv-no_data, #tb-result').hide();
-	$.post('https://api.remaxthailand.co.th/brand/member', {
-		apiKey:	'F85FA9B2-1473-4CEA-82A9-AB3966C9AD0C',
+	$.post('https://api.prodathailand.com/brand/member', {
+		apiKey:	'F85FA9B2',
 		memberKey: $('#authKey').val()
 	}, function(data){
 		if (data.success) {
@@ -181,6 +158,11 @@ function loadBrand(){
 				var result = data.result[i];
 				$('#cbb-brand').append('<option value="'+result.url+'">'+result.name+'</option>');
 			}
+			$('#cbb-brand option:eq(0)').attr('selected', 'selected');
+			loadCategory();
+		}
+		else {
+			$('#cbb-brand').append('<option value="">ทั้งหมด</option>');
 			$('#cbb-brand option:eq(0)').attr('selected', 'selected');
 			loadCategory();
 		}
@@ -229,33 +211,33 @@ function loadData(brand, category){
 				price[1] = price[2]*(100+data.percent[0].price1)/100;
 				price[0] = price[1]*(100+data.percent[0].price)/100;
 
-				html += '<tr id="'+result.id+'"><td width="50"><img src="https://img.remaxthailand.co.th/50x50/product/'+result.sku+'/1.jpg" width="50"></td>';
+				html += '<tr id="'+result.id+'"><td width="50"><img src="https://img.prodathailand.com/50x50/product/'+result.sku+'/1.jpg" width="50"></td>';
 				html += '<td><small>'+result.sku+'</small><span class="update pull-right badge bg-'+(result.isStockUpdate ? 'red' : 'gray')+' pointer">UPDATE</span><br>'+result.name+'</td>';
 				html += '<td class="text-right font-bigger">'+result.stock+'('+result.webStock+')<br>';
                 html += '<i class="fa fa-lg i-visible '+(result.visible ? 'text-success fa-eye' : 'text-danger fa-eye-slash')+' pointer"></i></td>';
 				html += '<td class="text-right"><input data-index = "0" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price < price[0]) ? 'text-red' : ((result.price > price[0]) ? 'text-green' : ''))+'" data-value="'+result.price+'">'+result.price+'</b><br>';
+				html += '<b class="current font-biggest '+((result.price < price[0]) ? 'text-red' : ((result.price > price[0]) ? 'text-green' : ''))+'" data-value="'+result.price+'">'+(result.price == null ? '-' : result.price)+'</b><br>';
 				html += '<small class="suggest price">'+price[0].toFixed(2)+'</small></td>';
 				html += '<td class="text-right"><input data-index = "1" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price1 < price[1]) ? 'text-red' : ((result.price1 > price[1]) ? 'text-green' : ''))+'" data-value="'+result.price1+'">'+result.price1+'</b>';
+				html += '<b class="current font-biggest '+((result.price1 < price[1]) ? 'text-red' : ((result.price1 > price[1]) ? 'text-green' : ''))+'" data-value="'+result.price1+'">'+(result.price1 == null ? '-' : result.price1)+'</b>';
 				html += '<br><small class="suggest price1">'+price[1].toFixed(2)+'</small></td>';
 				html += '<td class="text-right"><input data-index = "2" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price2 < price[2]) ? 'text-red' : ((result.price2 > price[2]) ? 'text-green' : ''))+'" data-value="'+result.price2+'">'+result.price2+'</b>';
+				html += '<b class="current font-biggest '+((result.price2 < price[2]) ? 'text-red' : ((result.price2 > price[2]) ? 'text-green' : ''))+'" data-value="'+result.price2+'">'+(result.price2 == null ? '-' : result.price2)+'</b>';
 				html += '<br><small class="suggest price2">'+price[2].toFixed(2)+'</small></td>';
 				html += '<td class="text-right"><input data-index = "3" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price3 < price[3]) ? 'text-red' : ((result.price3 > price[3]) ? 'text-green' : ''))+'" data-value="'+result.price3+'">'+result.price3+'</b>';
+				html += '<b class="current font-biggest '+((result.price3 < price[3]) ? 'text-red' : ((result.price3 > price[3]) ? 'text-green' : ''))+'" data-value="'+result.price3+'">'+(result.price3 == null ? '-' : result.price3)+'</b>';
 				html += '<br><small class="suggest price3">'+price[3].toFixed(2)+'</small></td>';
 				html += '<td class="text-right"><input data-index = "6" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price6 < price[6]) ? 'text-red' : ((result.price6 > price[6]) ? 'text-green' : ''))+'" data-value="'+result.price6+'">'+result.price6+'</b>';
+				html += '<b class="current font-biggest '+((result.price6 < price[6]) ? 'text-red' : ((result.price6 > price[6]) ? 'text-green' : ''))+'" data-value="'+result.price6+'">'+(result.price6 == null ? '-' : result.price6)+'</b>';
 				html += '<br><small class="suggest price6">'+price[6].toFixed(2)+'</small></td>';
 				html += '<td class="text-right"><input data-index = "4" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price4 < price[4]) ? 'text-red' : ((result.price4 > price[4]) ? 'text-green' : ''))+'" data-value="'+result.price4+'">'+result.price4+'</b>';
+				html += '<b class="current font-biggest '+((result.price4 < price[4]) ? 'text-red' : ((result.price4 > price[4]) ? 'text-green' : ''))+'" data-value="'+result.price4+'">'+(result.price4 == null ? '-' : result.price4)+'</b>';
 				html += '<br><small class="suggest price4">'+price[4].toFixed(2)+'</small></td>';
 				html += '<td class="text-right"><input data-index = "7" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price7 < price[7]) ? 'text-red' : ((result.price7 > price[7]) ? 'text-green' : ''))+'" data-value="'+result.price7+'">'+result.price7+'</b>';
+				html += '<b class="current font-biggest '+((result.price7 < price[7]) ? 'text-red' : ((result.price7 > price[7]) ? 'text-green' : ''))+'" data-value="'+result.price7+'">'+(result.price7 == null ? '-' : result.price7)+'</b>';
 				html += '<br><small class="suggest price7">'+price[7].toFixed(2)+'</small></td>';
 				html += '<td class="text-right"><input data-index = "5" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price5 < price[5]) ? 'text-red' : ((result.price5 > price[5]) ? 'text-green' : ''))+'" data-value="'+result.price5+'">'+result.price5+'</b>';
+				html += '<b class="current font-biggest '+((result.price5 < price[5]) ? 'text-red' : ((result.price5 > price[5]) ? 'text-green' : ''))+'" data-value="'+result.price5+'">'+(result.price7 == null ? '-' : result.price7)+'</b>';
 				html += '<br><small class="suggest price5">'+price[5].toFixed(2)+'</small></td>';
 				html += '<td class="text-right th-cost hidden"><b class="current font-biggest text-blue">'+result.cost.toFixed(2)+'</b><br>';
 				html += '<span class="btn-cancel btn btn-warning btn-xs margin-right-5 hidden"><i class="fa fa-rotate-left"></i></span><span class="btn-save btn btn-success btn-xs hidden"><i class="fa fa-save"></i></span></td>';
