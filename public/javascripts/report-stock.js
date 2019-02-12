@@ -67,23 +67,23 @@ function loadSummaryStock(){
 				var html = '';
 				for( i=0; i<data.result.length; i++ ) {
 					var result = data.result[i];
-
-					html += '<tr>';
-					html += '<td class="" valign="middle">'+result.categoryName+'</td>';
-					html += '<td class="text-right sumremaxQty" valign="middle" data-val='+ result.remaxQty +'>'+(result.remaxQty != 0 ? numberWithCommas(result.remaxQty) : '-')+'</td>';
-					html += '<td class="text-right sumremaxPrice" valign="middle" data-val='+ result.remaxPrice +'>'+(result.remaxPrice != 0 ? numberWithCommas(result.remaxPrice) : '-')+'</td>';
-					
-					html += '<td class="text-right sumwkQty" valign="middle" data-val='+ result.wkQty +'>'+(result.wkQty != 0 ? numberWithCommas(result.wkQty) : '-')+'</td>';
-					html += '<td class="text-right sumwkPrice" valign="middle" data-val='+ result.wkPrice +'>'+(result.wkPrice != 0 ? numberWithCommas(result.wkPrice) : '-')+'</td>';
-
-					html += '<td class="text-right sumpisenQty" valign="middle" data-val='+ result.pisenQty +'>'+(result.pisenQty != 0 ? numberWithCommas(result.pisenQty) : '-')+'</td>';
-					html += '<td class="text-right sumpisenPrice" valign="middle" data-val='+ result.pisenPrice +'>'+(result.pisenPrice != 0 ? numberWithCommas(result.pisenPrice) : '-')+'</td>';
-
-					html += '<td class="text-right sumpngQty" valign="middle" data-val='+ result.pngQty +'>'+(result.pngQty != 0 ? numberWithCommas(result.pngQty) : '-')+'</td>';
-					html += '<td class="text-right sumpngPrice" valign="middle" data-val='+ result.pngPrice +'>'+(result.pngPrice != 0 ? numberWithCommas(result.pngPrice) : '-')+'</td>';
-
-					html += '</tr>';		
-					
+					if(result.remaxQty > 0 || result.wkQty > 0 || result.pisenQty > 0 || result.pngQty > 0) {
+						html += '<tr>';
+						html += '<td class="" valign="middle">'+result.categoryName+'</td>';
+						html += '<td class="text-right sumremaxQty" valign="middle" data-val='+ result.remaxQty +'>'+(result.remaxQty != 0 ? numberWithCommas(result.remaxQty) : '-')+'</td>';
+						html += '<td class="text-right sumremaxPrice" valign="middle" data-val='+ result.remaxPrice +'>'+(result.remaxPrice != 0 ? numberWithCommas(result.remaxPrice) : '-')+'</td>';
+						
+						html += '<td class="text-right sumwkQty" valign="middle" data-val='+ result.wkQty +'>'+(result.wkQty != 0 ? numberWithCommas(result.wkQty) : '-')+'</td>';
+						html += '<td class="text-right sumwkPrice" valign="middle" data-val='+ result.wkPrice +'>'+(result.wkPrice != 0 ? numberWithCommas(result.wkPrice) : '-')+'</td>';
+	
+						html += '<td class="text-right sumpisenQty" valign="middle" data-val='+ result.pisenQty +'>'+(result.pisenQty != 0 ? numberWithCommas(result.pisenQty) : '-')+'</td>';
+						html += '<td class="text-right sumpisenPrice" valign="middle" data-val='+ result.pisenPrice +'>'+(result.pisenPrice != 0 ? numberWithCommas(result.pisenPrice) : '-')+'</td>';
+	
+						html += '<td class="text-right sumpngQty" valign="middle" data-val='+ result.pngQty +'>'+(result.pngQty != 0 ? numberWithCommas(result.pngQty) : '-')+'</td>';
+						html += '<td class="text-right sumpngPrice" valign="middle" data-val='+ result.pngPrice +'>'+(result.pngPrice != 0 ? numberWithCommas(result.pngPrice) : '-')+'</td>';
+	
+						html += '</tr>';
+					}
 				}
 
 				$('#tb-result tbody').html( html );
