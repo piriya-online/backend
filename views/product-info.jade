@@ -12,6 +12,12 @@ block content
 				.form-group.col-sm-3.text-danger
 					label(for='input') #{__('Category')}
 					select#cbb-category.form-control.col-sm-3
+				.form-group.col-sm-3.text-danger
+					label(for='input') สถานะ
+					select#cbb-isVisible.form-control.col-sm-3
+						option(value='all') ทั้งหมด
+						option(value='1') แสดงหน้าเว็บ
+						option(value='0') ไม่แสดงหน้าเว็บ
 				
 			#dv-loading.callout.callout-info.text-center
 				img.loading.top-2(src="/images/icons/loading.gif", alt="loading") 
