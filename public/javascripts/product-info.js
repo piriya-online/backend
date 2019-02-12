@@ -213,11 +213,6 @@ function loadData(brand, category){
 			$('#tb-result thead .price1').html( data.percent[0].price1+'%' );
 			$('#tb-result thead .price2').html( data.percent[0].price2+'%' );
 			$('#tb-result thead .price3').html( data.percent[0].price3+'%' );
-			$('#tb-result thead .price4').html( data.percent[0].price4+'%' );
-			$('#tb-result thead .price5').html( data.percent[0].price5+'%' );
-			$('#tb-result thead .priceChain').html( data.percent[0].price6+'%' );
-			$('#tb-result thead .priceChainSrp').html( '&nbsp;' );
-
 
 			var html = '';
 
@@ -250,18 +245,6 @@ function loadData(brand, category){
 				html += '<td class="text-right"><input data-index = "3" class="form-control input-sm price-input font-biggest hidden" type="text" />';
 				html += '<b class="current font-biggest '+((result.price3 < price[3]) ? 'text-red' : ((result.price3 > price[3]) ? 'text-green' : ''))+'" data-value="'+result.price3+'">'+(result.price3 == null ? '-' : result.price3)+'</b>';
 				html += '<br><small class="suggest price3">'+price[3].toFixed(2)+'</small></td>';
-				html += '<td class="text-right"><input data-index = "6" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price6 < price[6]) ? 'text-red' : ((result.price6 > price[6]) ? 'text-green' : ''))+'" data-value="'+result.price6+'">'+(result.price6 == null ? '-' : result.price6)+'</b>';
-				html += '<br><small class="suggest price6">'+price[6].toFixed(2)+'</small></td>';
-				html += '<td class="text-right"><input data-index = "4" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price4 < price[4]) ? 'text-red' : ((result.price4 > price[4]) ? 'text-green' : ''))+'" data-value="'+result.price4+'">'+(result.price4 == null ? '-' : result.price4)+'</b>';
-				html += '<br><small class="suggest price4">'+price[4].toFixed(2)+'</small></td>';
-				html += '<td class="text-right"><input data-index = "7" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price7 < price[7]) ? 'text-red' : ((result.price7 > price[7]) ? 'text-green' : ''))+'" data-value="'+result.price7+'">'+(result.price7 == null ? '-' : result.price7)+'</b>';
-				html += '<br><small class="suggest price7">'+price[7].toFixed(2)+'</small></td>';
-				html += '<td class="text-right"><input data-index = "5" class="form-control input-sm price-input font-biggest hidden" type="text" />';
-				html += '<b class="current font-biggest '+((result.price5 < price[5]) ? 'text-red' : ((result.price5 > price[5]) ? 'text-green' : ''))+'" data-value="'+result.price5+'">'+(result.price7 == null ? '-' : result.price7)+'</b>';
-				html += '<br><small class="suggest price5">'+price[5].toFixed(2)+'</small></td>';
 				html += '<td class="text-right th-cost hidden"><b class="current font-biggest text-blue">'+result.cost.toFixed(2)+'</b><br>';
 				html += '<span class="btn-cancel btn btn-warning btn-xs margin-right-5 hidden"><i class="fa fa-rotate-left"></i></span><span class="btn-save btn btn-success btn-xs hidden"><i class="fa fa-save"></i></span></td>';
 				html += '</tr>';
@@ -280,9 +263,7 @@ function loadData(brand, category){
 			}
 			else {
 				$('#dv-no_data').hide();
-				if( ['150100001','141100062','150400620','160404299','150400670','180712870','151002317','150400604'].indexOf( $('#mId').val() ) != -1 ){
-					$('.th-cost').show();
-				}
+				$('.th-cost').show();
 			}
 
 			$('.price-input').ForceNumericOnly();
