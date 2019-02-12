@@ -11,6 +11,29 @@ $(function() {
 	$(document).on('change', '#cbb-brand', function(){
 		loadData( $('#cbb-brand').val(), Cookies.get('category') );
 	});
+	$(document).on('change', '#cbb-isVisible', function(){
+		$('tbody tr .i-visible').each(function(){
+			if($('#cbb-isVisible').val() == 'all'){
+				$(this).parents('tr').show();
+			}
+			else if($('#cbb-isVisible').val() == '1') {
+				if ($(this).hasClass('text-success')){
+					$(this).parents('tr').show();
+				}
+				else {
+					$(this).parents('tr').hide();
+				}
+			}
+			else {
+				if ($(this).hasClass('text-success')){
+					$(this).parents('tr').hide();
+				}
+				else {
+					$(this).parents('tr').show();
+				}
+			}
+		})
+	});
 
 	$(document).on('click', '#tb-result tbody b.current', function(){
 		if(!$('#th-cost').is(":hidden")){
